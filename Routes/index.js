@@ -1,6 +1,6 @@
 
 /*
- * GET home page, which is specified in Jade.
+ * GET home page, which is specified in Jade.dhjdgjjghdhgjdjhgd
  */
 
 exports.do_work = function(req, res){
