@@ -1,6 +1,17 @@
 !!! strict
 html(xmlns='http://www.w3.org/1999/xhtml')
-head
+  head
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+    script(src='http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js')
+  body
+    script
+      $(document).ready(function(){
+      $("#but1[rel]").overlay();
+      $("#but2[rel]").overlay();
+      $("#but3[rel]").overlay();
+      $("#but4[rel]").overlay();
+      $("#but5[rel]").overlay();
+      $("#but6[rel]").overlay();});
     meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
     title
     meta(name='keywords', content='')
@@ -10,11 +21,16 @@ head
     link(href='/stylesheets/fonts.css', rel='stylesheet', type='text/css', media='all')
     //if IE 6
       link(href='default_ie6.css', rel='stylesheet', type='text/css')
-  body
+    //if IE 6
+      link(href='default_ie6.css', rel='stylesheet', type='text/css')
+    //if IE 6
+      link(href='default_ie6.css', rel='stylesheet', type='text/css')
+    //if IE 6
+      link(href='default_ie6.css', rel='stylesheet', type='text/css')
     #header.container
       #logo
         h1
-          a(href='#') TailPiece
+          a(href='#') PennTerest
       #menu
         ul
           li.active
@@ -28,60 +44,128 @@ head
     #page
       .container
         .title
-          h2 Nulla luctus eleifend purus
-          p
-            | This is
-            strong TailPiece
-            | , a free, fully standards-compliant CSS template designed by
-            a(href='http://www.freecsstemplates.org/', rel='nofollow') FreeCSSTemplates.org
-            | . The photos in this template are from
-            a(href='http://fotogrph.com/')  Fotogrph
-            | . This free template is released under a
-            a(href='http://creativecommons.org/licenses/by/3.0/') Creative Commons Attributions 3.0
-            | license, so you are pretty much free to do whatever you want with it (even use it commercially) provided you keep the links in the footer intact. Aside from that, have fun with it :)
+          h2  
+          p  
         .boxA
           .box.margin-btm
             img(src='./images/pic01.jpg', width='320', height='180', alt='')
             .details
               p
-                | Consectetuer adipiscing elit. Nam pede erat, porta eu, lobortis eget, tempus et, tellus. Etiam neque. Vivamus consequat lorem at nisl.
-            a.button(href='#') More Details
+                | tag1
+                | board1
+            #but1.button(rel='#image1') Pin it!
+            #image1.simple_overlay
+              img(src='./images/pic01.jpg')
+              .details
+                table
+                  tr
+                    td
+                      select
+                        option(value='board1') Board 1
+                        option(value='board2') Board 2
+                  tr
+                    td
+                      button
+                        | Pin it!
           .box
             img(src='/images/pic02.jpg', width='320', height='220', alt='')
             .details
               p
-                | Consectetuer adipiscing elit. Nam pede erat, porta eu, lobortis eget, tempus et, tellus. Etiam neque. Vivamus consequat lorem at nisl.
-            a.button(href='#') More Details
+                | tag1
+                | board1
+            #but2.button(rel='#image2') Pin it!
+            #image2.simple_overlay
+              img(src='./images/pic02.jpg')
+              .details
+                table
+                  tr
+                    td
+                      select
+                        option(value='board1') Board 1
+                        option(value='board2') Board 2
+                  tr
+                    td
+                      button
+                        | Pin it!
         .boxB
           .box
             img(src='images/pic03.jpg', width='320', height='280', alt='')
             .details
               p
-                | Consectetuer adipiscing elit. Nam pede erat, porta eu, lobortis eget, tempus et, tellus. Etiam neque. Vivamus consequat lorem at nisl.
-            a.button(href='#') More Details
+                | tag1
+                | board1
+            #but3.button(rel='#image3') Pin it!
+            #image3.simple_overlay
+              img(src='./images/pic03.jpg')
+              .details
+                table
+                  tr
+                    td
+                      select
+                        option(value='board1') Board 1
+                        option(value='board2') Board 2
+                  tr
+                    td
+                      button
+                        | Pin it!
           .box
             img(src='images/pic05.jpg', width='320', height='140', alt='')
             .details
               p
-                | Consectetuer adipiscing elit. Nam pede erat, porta eu, lobortis eget, tempus et, tellus. Etiam neque. Vivamus consequat lorem at nisl.
-            a.button(href='#') More Details
+                | tag1
+                | board1
+            #but5.button(rel='#image5') Pin it!
+            #image5.simple_overlay
+              img(src='./images/pic05.jpg')
+              .details
+                table
+                  tr
+                    td
+                      select
+                        option(value='board1') Board 1
+                        option(value='board2') Board 2
+                  tr
+                    td
+                      button
+                        | Pin it!
         .boxC
           .box
             img(src='images/pic04.jpg', width='320', height='200', alt='')
             .details
               p
-                | Consectetuer adipiscing elit. Nam pede erat, porta eu, lobortis eget, tempus et, tellus. Etiam neque. Vivamus consequat lorem at nisl.
-            a.button(href='#') More Details
+                | tag1
+                | board1
+            #but4.button(rel='#image4') Pin it!
+            #image4.simple_overlay
+              img(src='./images/pic04.jpg')
+              .details
+                table
+                  tr
+                    td
+                      select
+                        option(value='board1') Board 1
+                        option(value='board2') Board 2
+                  tr
+                    td
+                      button
+                        | Pin it!
           .box
             img(src='images/pic06.jpg', width='320', height='200', alt='')
             .details
               p
-                | Consectetuer adipiscing elit. Nam pede erat, porta eu, lobortis eget, tempus et, tellus. Etiam neque. Vivamus consequat lorem at nisl.
-            a.button(href='#') More Details
-    #copyright.container
-      p
-        | Copyright (c) 2013 Sitename.com. All rights reserved. | Photos by
-        a(href='http://fotogrph.com/') Fotogrph
-        | | Design by
-        a(href='http://www.freecsstemplates.org/', rel='nofollow') FreeCSSTemplates.org
-        | .
+                | Ctag1
+                | board1
+            #but6.button(rel='#image6') Pin it!
+            #image6.simple_overlay
+              img(src='./images/pic06.jpg')
+              .details
+                table
+                  tr
+                    td
+                      select
+                        option(value='board1') Board 1
+                        option(value='board2') Board 2
+                  tr
+                    td
+                      button
+                        | Pin it!

@@ -1,6 +1,5 @@
 /**
- * Simple Whorek 2 application for CIS 550 gfdgdgdgdggdggdgg
- * hello
+ * Simple Homework 2 application for CIS 550
  * 
  * zives
  */
@@ -16,7 +15,7 @@ var http = require('http');
 var path = require('path');
 var stylus =  require("stylus");
 var nib =     require("nib");
-
+var $ = require('jquery').create();
 
 // Initialize express
 var app = express();
