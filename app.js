@@ -17,7 +17,7 @@ var http = require('http');
 var path = require('path');
 var stylus =  require("stylus");
 var nib =     require("nib");
-var $ = require('jquery').create();
+
 
 // Initialize express
 var app = express();
@@ -25,7 +25,7 @@ var app = express();
 init_app(app);
 
 app.get('/', function(req, res){
-	  res.render('./index.jade', { 
+	  res.render('./login.jade', { 
 		  title: 'HW2' 
 	  });});
 http.createServer(app).listen(app.get('port'), function(){

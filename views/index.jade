@@ -18,6 +18,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
     meta(name='description', content='')
     link(href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900', rel='stylesheet')
     link(href='stylesheets/default.css', rel='stylesheet', type='text/css', media='all')
+    link(href='stylesheets/menu.css', rel='stylesheet', type='text/css', media='all')
     link(href='/stylesheets/fonts.css', rel='stylesheet', type='text/css', media='all')
     //if IE 6
       link(href='default_ie6.css', rel='stylesheet', type='text/css')
@@ -34,13 +35,34 @@ html(xmlns='http://www.w3.org/1999/xhtml')
       #menu
         ul
           li.active
-            a(href='#', accesskey='1', title='') Homepage
-          li
-            a(href='#', accesskey='3', title='') Gallery
-          li
-            a(href='#', accesskey='3', title='') About
-          li
-            a(href='#', accesskey='5', title='') Contact
+            a(href='index.html')
+              span Home
+          li.has-sub
+            a(href='#')
+              span Products
+            ul
+              li
+                a(href='#')
+                  span Widgets
+              li
+                a(href='#')
+                  span Menus
+              li.last
+                a(href='#')
+                  span Products
+          li.has-sub
+            a(href='#')
+              span Company
+            ul
+              li
+                a(href='#')
+                  span About
+              li.last
+                a(href='#')
+                  span Location
+          li.last
+            a(href='#')
+              span Contact
     #page
       .container
         .title
@@ -65,8 +87,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                         option(value='board2') Board 2
                   tr
                     td
-                      button
-                        | Pin it!
+                      button Pin it!
           .box
             img(src='/images/pic02.jpg', width='320', height='220', alt='')
             .details
@@ -85,8 +106,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                         option(value='board2') Board 2
                   tr
                     td
-                      button
-                        | Pin it!
+                      button Pin it!
         .boxB
           .box
             img(src='images/pic03.jpg', width='320', height='280', alt='')
@@ -106,8 +126,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                         option(value='board2') Board 2
                   tr
                     td
-                      button
-                        | Pin it!
+                      button Pin it!
           .box
             img(src='images/pic05.jpg', width='320', height='140', alt='')
             .details
@@ -126,8 +145,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                         option(value='board2') Board 2
                   tr
                     td
-                      button
-                        | Pin it!
+                      button Pin it!
         .boxC
           .box
             img(src='images/pic04.jpg', width='320', height='200', alt='')
@@ -147,8 +165,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                         option(value='board2') Board 2
                   tr
                     td
-                      button
-                        | Pin it!
+                      button Pin it!
           .box
             img(src='images/pic06.jpg', width='320', height='200', alt='')
             .details
@@ -167,5 +184,4 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                         option(value='board2') Board 2
                   tr
                     td
-                      button
-                        | Pin it!
+                      button Pin it!
