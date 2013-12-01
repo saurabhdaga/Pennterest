@@ -16,30 +16,35 @@ head
           .clear-shadow
           #content
             .content-1
-              form(action='', autocomplete='on')
+              form(action='/signup',name='signupform', autocomplete='on',method='post')
                 p
                   label.uname(for='usernamesignup', data-icon='u') Your username
-                  input.field(name='usernamesignup', required='required', type='text', placeholder='myusername')
+                  input.field(name='usernamesignup', type='text', placeholder='myusername')
                 p
-                  label.youmail(for='emailsignup', data-icon='e')  Your email
-                  input.field(name='emailsignup', required='required', type='email', placeholder='myusername@gmail.com')
+                  label.youmail(for='emailsignup', data-icon='e') Your Email
+                  input.field(name='emailsignup', type='email', placeholder='myusername@gmail.com') 
                 p
                   label.youpasswd(for='passwordsignup', data-icon='p') Your password 
-                  input.field(name='passwordsignup', required='required', type='password', placeholder='mypassword')
+                  input.field(name='passwordsignup', type='password', placeholder='mypassword')
                 p
                   label.youpasswd(for='passwordsignup_confirm', data-icon='p') Please confirm your password 
-                  input.field(name='passwordsignup_confirm', required='required', type='password', placeholder='mypassword')
+                  input.field(name='passwordsignup_confirm', type='password', placeholder='mypassword')
                 p.signin.button
                   input(type='checkbox', required='required')
                   | I agree with terms and conditions
                   input(type='submit', value='Sign up')
+                p
+                  | #{title}
+                
             .content-2
-              form(action='', autocomplete='on')
+              form(action='/login', name='loginform',autocomplete='on',method ='post')
                 p
                   label.uname(for='username', data-icon='u')  Your email or username 
-                  input.field(name='username', required='required', type='text', placeholder='myusername or myusername@gmail.com')
+                  input.field(name='username', type='text', placeholder='myusername or myusername@gmail.com')
                 p
                   label.youpasswd(for='password', data-icon='p')  Your password 
-                  input.field(name='password', required='required', type='password', placeholder='mypassword')
+                  input.field(name='password', type='password', placeholder='mypassword')
                 p.keeplogin
                   input(type='submit', value='Login')
+                p
+                  | #{title1}  

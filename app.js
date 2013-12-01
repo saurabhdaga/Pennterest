@@ -14,21 +14,50 @@ var express = require('express');
 //var images = require('./images');
 var routes= require('./Routes');
 //var fonts=require('./fonts');
+var signup= require('./Routes/signup.js');
+var login= require('./Routes/login');
+var index= require('./Routes/index');
 var http = require('http');
 var path = require('path');
 var stylus =  require("stylus");
 var nib =     require("nib");
+var url= require("url");
 
+var crypto=require('crypto');
 
 // Initialize express
 var app = express();
 // .. and our app
 init_app(app);
+app.get('/',function(req,res){
+	res.render('login.jade'
+			);
 
-app.get('/', function(req, res){
-	  res.render('./login.jade', { 
-		  title: 'HW2' 
-	  });});
+	
+	
+});
+
+app.post('/signup',signup.do_work);
+app.post('/login',login.do_work);
+
+
+
+/*
+http.createServer(function(req,res){
+	//var path=url.parse(req.url).pathname;
+	//console.log(path);
+	
+	
+}).listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+});
+
+
+*/
+
+
+
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
