@@ -47,7 +47,7 @@ function insert_user(res,name,email,password){
 	    	console.log(err);
 	    } else {
 		  	// selecting rows
-		  	connection.execute("insert  into USERS values ( 3,'"+name+"','"+password+"',null,'"+email+"',null,'m',null,null)",
+		  	connection.execute("insert  into USERS values ( 4,'"+name+"','"+password+"',null,'"+email+"',null,null,null,null)",
 		  			   [], 
 		  			   function(err, results) {
 		  	    if ( err ) {
@@ -56,6 +56,7 @@ function insert_user(res,name,email,password){
 		  	    	connection.close();
 		  	    } else {
 		  	    	connection.close(); // done with the connection
+		  	    	res.redirect('index');
 		  	    	
 		  	    	
 		  	    }

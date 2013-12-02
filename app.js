@@ -39,7 +39,7 @@ app.get('/',function(req,res){
 
 app.post('/signup',signup.do_work);
 app.post('/login',login.do_work);
-
+app.get('/index',index.do_work);
 
 
 /*

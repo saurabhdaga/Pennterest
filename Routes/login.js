@@ -9,8 +9,8 @@ var connectData = {
   "database": "PENNTR" };
 var oracle =  require("oracle");
 var crypto=require('crypto');
-
-
+var express=require('express');
+var app = express();
 function query_db(res,name,pass) {
 	  oracle.connect(connectData, function(err, connection) {
 	    if ( err ) {
@@ -26,7 +26,18 @@ function query_db(res,name,pass) {
 		  	    	connection.close(); // done with the connection
 		  	    	console.log(results);
 		  	    	if(results.length >0)
-		  	    		console.log('Valid login');
+		  	    		{console.log('Valid login');
+		  	    		res.redirect('index');
+		  	    		/*
+		  	    		app.use(express.cookieParser());
+		  	    		app.use(express.session({
+		  	    		  
+		  	  		    user: name
+		  	  		  }));
+		  	    	req.session={"loginDetails":name};
+		  	    	*/
+		  	    		}
+		  	    		
 		  	    	else
 		  	    		login_invalid(res);
 		  	    	
@@ -49,6 +60,8 @@ function login_invalid(res) {
 exports.do_work = function(req, res){
 	var sha1=crypto.createHash('sha1');
 	var pass=sha1.update(req.body.password).digest('hex');
-	var db_res=query_db(res,req.body.username,pass);
+	var user=query_db(res,req.body.username,pass);
+	
+
 	
 };

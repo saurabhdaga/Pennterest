@@ -52,14 +52,15 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                   span Products
           li.has-sub
             a(href='#')
-              span Company
+              span Boards
             ul
-              li
-                a(href='#')
-                  span About
+              - for( var inx =0;inx<results.length;inx++)
+                  li
+                    a(href='#')
+                      span #{results[inx].BOARDNAME}
               li.last
                 a(href='#')
-                  span Location
+                  span Create Board
           li.last
             a(href='#')
               span Contact
