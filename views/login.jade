@@ -9,9 +9,9 @@ head
       h1 Pennterest
       #container
         section.tabs
-          input#tab-1.tab-selector-1(type='radio', name='radio-set', checked='checked')
+          input#tab-1.tab-selector-1(type='radio', name='radio-set')
           span.tab-label-1(for='tab-1') Signup
-          input#tab-2.tab-selector-2(type='radio', name='radio-set')
+          input#tab-2.tab-selector-2(type='radio', name='radio-set', checked='checked')
           span.tab-label-2(for='tab-2') Login
           .clear-shadow
           #content
@@ -39,8 +39,8 @@ head
             .content-2
               form(action='/login', name='loginform',autocomplete='on',method ='post')
                 p
-                  label.uname(for='username', data-icon='u')  Your email or username 
-                  input.field(name='username', type='text', placeholder='myusername or myusername@gmail.com')
+                  label.uname(for='email', data-icon='u')  Your email 
+                  input.field(name='email', type='text', placeholder='myusername@gmail.com')
                 p
                   label.youpasswd(for='password', data-icon='p')  Your password 
                   input.field(name='password', type='password', placeholder='mypassword')

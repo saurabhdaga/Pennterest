@@ -15,7 +15,7 @@ function query_db_boards(res,id) {
 	    	console.log(err);
 	    } else {
 		  	// selecting rows
-		  	connection.execute("SELECT * FROM board where userid="+id,
+		  	connection.execute("SELECT * FROM board where userid='"+id+"'",
 		  			   [], 
 		  			   function(err, results) {
 		  	    if ( err ) {
@@ -42,5 +42,5 @@ function query_db_boards(res,id) {
 exports.do_work = function(req, res){
 	//console.log("asdfadfg"+req.session);
 
-  query_db_boards(res,'4');
+  query_db_boards(res,req.session.name);
 };

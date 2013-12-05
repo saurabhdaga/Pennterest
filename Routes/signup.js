@@ -36,7 +36,7 @@ function query_db(res,name,email,pass) {
 function user_exists(res,name,email,results) {
 	
 	res.render('login.jade',
-		   { title: "user already exists"
+		   { title1: "user already exists"
 		}
 	  );
 }
