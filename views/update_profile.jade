@@ -1,0 +1,66 @@
+!!! strict
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+    script(src='http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js')
+    script(src='http://code.jquery.com/ui/1.10.1/jquery-ui.js')
+  body
+    script
+      $(function() {
+      $( "#calendar" ).datepicker({changeMonth: true,changeYear: true,dateFormat:"d M,y"});
+      });
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    title
+    meta(name='keywords', content='')
+    meta(name='description', content='')
+    link(href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900', rel='stylesheet')
+    link(href='stylesheets/default.css', rel='stylesheet', type='text/css', media='all')
+    link(href='stylesheets/menu.css', rel='stylesheet', type='text/css', media='all')
+    link(href='/stylesheets/fonts.css', rel='stylesheet', type='text/css', media='all')
+    link(href='//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css', rel='stylesheet', type='text/css', media='all')
+    #header.container
+      #logo
+        h1
+          a(href='#') PennTerest
+      #menu
+        ul
+          li.active
+            a(href='index.html')
+              span Home
+          li.has-sub
+            a(href='#')
+              span Products
+            ul
+              li
+                a(href='#')
+                  span Widgets
+              li
+                a(href='#')
+                  span Menus
+              li.last
+                a(href='#')
+                  span Products
+          li.has-sub
+            a(href='#')
+              span Company
+            ul
+              li
+                a(href='#')
+                  span About
+              li.last
+                a(href='#')
+                  span Location
+          li.last
+            a(href='#')
+              span Contact
+    #page
+      .container
+        .title
+          form(action='/update_profile', method='post')
+            p
+              | Please select your birth date :
+              input#calendar(type='text')
+            p
+              | Please select your affiliation :
+              input(type='text', name='affilation')
+            input(type='submit', value='Submit')

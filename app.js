@@ -17,6 +17,7 @@ var routes= require('./Routes');
 //var fonts=require('./fonts');
 var signup= require('./Routes/signup.js');
 var login= require('./Routes/login');
+var update_profile=require('./Routes/update_profile');
 var index= require('./Routes/index');
 var http = require('http');
 var path = require('path');
@@ -41,6 +42,7 @@ app.get('/',function(req,res){
 app.post('/signup',signup.do_work);
 app.post('/login',login.do_work);
 app.get('/index',index.do_work);
+app.get('/update_profile',update_profile.do_work);
 
 
 /*
