@@ -72,7 +72,7 @@ exports.do_work = function(req, res){
 	var pass=sha1.update(req.body.passwordsignup).digest('hex');
 	
 	query_db(res,req.body.usernamesignup,req.body.emailsignup,pass);
-	
+	req.session.name= req.body.emailsignup;
 	
 
 
