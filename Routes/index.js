@@ -9,7 +9,7 @@ var connectData = {
   "database": "PENNTR" };
 var express = require('express');
 var oracle=require('oracle');
-function query_db_boards(res,id) {
+function query_db_boards(req,res,id) {
 	  oracle.connect(connectData, function(err, connection) {
 	    if ( err ) {
 	    	console.log(err);
@@ -25,6 +25,7 @@ function query_db_boards(res,id) {
 		  	    	console.log(results);
 		  	    	if(results.length >0)
 		  	    		{console.log(' boards' + results.length);
+		  	    		console.log(" printing session variables "+ req.session.name + " "  + req.session.number);
 		  	    		res.render('index.jade',{results:results});
 		  	    		
 		  	    		}
@@ -42,5 +43,5 @@ function query_db_boards(res,id) {
 exports.do_work = function(req, res){
 	//console.log("asdfadfg"+req.session);
 
-  query_db_boards(res,req.session.name);
+  query_db_boards(req,res,req.session.name);
 };

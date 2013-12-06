@@ -35,6 +35,7 @@ function query_db(req,res,email,pass) {
  	   	if(results.length >0 && results[0].PASSWORD.indexOf(pass) !=-1)
  	   	{console.log('Valid login');
  	   	req.session.name= email;
+ 	   	req.session.number = '1';
  	   	res.redirect('index');
  	   	
  	   	
