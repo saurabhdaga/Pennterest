@@ -4,14 +4,13 @@ html(xmlns='http://www.w3.org/1999/xhtml')
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
     script(src='http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js')
   body
-    script
-      $(document).ready(function(){
-      $("#but1[rel]").overlay({mask: '#000'});
-      $("#but2[rel]").overlay({mask: '#000'});
-      $("#but3[rel]").overlay({mask: '#000'});
-      $("#but4[rel]").overlay({mask: '#000'});
-      $("#but5[rel]").overlay({mask: '#000'});
-      $("#but6[rel]").overlay({mask: '#000'});});
+    - for( var inx=0;inx<(result.total);inx++)
+         !="<script>$(document).ready(function(){$('#but"+inx+"[rel]').overlay({mask:'#000'});});</script>"
+
+    - for( var inx=0;inx<(result.total);inx++)
+         !="<script>$(document).ready(function(){$('#butr"+inx+"[rel]').overlay({mask:'#000'});});</script>"
+    
+    !="<script>$(document).ready(function(){$('#create[rel]').overlay({mask:'#000'});});</script>"     
     meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
     title
     meta(name='keywords', content='')
@@ -32,157 +31,576 @@ html(xmlns='http://www.w3.org/1999/xhtml')
       #logo
         h1
           a(href='#') PennTerest
+      #search
+        form(action='/search' method='post')
+            textarea(name='search', cols='50', rows='1')
+                | Enter some text...
+              input(type='submit')
+        
       #menu
         ul
           li.active
-            a(href='index.html')
+            a(href='/index')
               span Home
+          li.active
+            a(href='/profile')
+              span Profile
+
           li.has-sub
-            a(href='#')
-              span Products
-            ul
-              li
-                a(href='#')
-                  span Widgets
-              li
-                a(href='#')
-                  span Menus
-              li.last
-                a(href='#')
-                  span Products
-          li.has-sub
-            a(href='#')
+            a
               span Boards
             ul
-              - for( var inx =0;inx<results.length;inx++)
-                  li
-                    a(href='#')
-                      span #{results[inx].BOARDNAME}
-              li.last
-                a(href='#')
-                  span Create Board
+              - for(var inx=0;inx<(boardResult.boardsLength);inx++)
+                   li
+                     a(href='/board?name=#{boardResult.boards[inx]}')
+                       span #{boardResult.boards[inx]}
+          li.active
+            a
+              span 
+                div(id='create',rel='#forboard') Create Board
+                div(id='forboard', class='simple_overlay')
+                  .details
+                    form(action='/createBoard',method='post')
+                      label(style='color:#000;')
+                        | Enter the board name: 
+                        input(type='text',name='board')
+                        input(type='submit',value='Submit')
+                        
           li.last
-            a(href='#')
-              span Contact
+            a(href='/recommendation')
+              span Recommendation                     	         
     #page
       .container
         .title
-          h2  
-          p  
-        .boxA
-          .box.margin-btm
-            img(src='./images/pic01.jpg', width='320', height='180', alt='')
-            .details
-              p
-                | tag1
-                | board1
-            #but1.button(rel='#image1') Pin it!
-            #image1.simple_overlay
-              img(src='./images/pic01.jpg')
-              .details
-                table
-                  tr
-                    td
-                      select
-                        option(value='board1') Board 1
-                        option(value='board2') Board 2
-                  tr
-                    td
-                      button Pin it!
-          .box
-            img(src='/images/pic02.jpg', width='320', height='220', alt='')
-            .details
-              p
-                | tag1
-                | board1
-            #but2.button(rel='#image2') Pin it!
-            #image2.simple_overlay
-              img(src='./images/pic02.jpg')
-              .details
-                table
-                  tr
-                    td
-                      select
-                        option(value='board1') Board 1
-                        option(value='board2') Board 2
-                  tr
-                    td
-                      button Pin it!
-        .boxB
-          .box
-            img(src='images/pic03.jpg', width='320', height='280', alt='')
-            .details
-              p
-                | tag1
-                | board1
-            #but3.button(rel='#image3') Pin it!
-            #image3.simple_overlay
-              img(src='./images/pic03.jpg')
-              .details
-                table
-                  tr
-                    td
-                      select
-                        option(value='board1') Board 1
-                        option(value='board2') Board 2
-                  tr
-                    td
-                      button Pin it!
-          .box
-            img(src='images/pic05.jpg', width='320', height='140', alt='')
-            .details
-              p
-                | tag1
-                | board1
-            #but5.button(rel='#image5') Pin it!
-            #image5.simple_overlay
-              img(src='./images/pic05.jpg')
-              .details
-                table
-                  tr
-                    td
-                      select
-                        option(value='board1') Board 1
-                        option(value='board2') Board 2
-                  tr
-                    td
-                      button Pin it!
-        .boxC
-          .box
-            img(src='images/pic04.jpg', width='320', height='200', alt='')
-            .details
-              p
-                | tag1
-                | board1
-            #but4.button(rel='#image4') Pin it!
-            #image4.simple_overlay
-              img(src='./images/pic04.jpg')
-              .details
-                table
-                  tr
-                    td
-                      select
-                        option(value='board1') Board 1
-                        option(value='board2') Board 2
-                  tr
-                    td
-                      button Pin it!
-          .box
-            img(src='images/pic06.jpg', width='320', height='200', alt='')
-            .details
-              p
-                | Ctag1
-                | board1
-            #but6.button(rel='#image6') Pin it!
-            #image6.simple_overlay
-              img(src='./images/pic06.jpg')
-              .details
-                table
-                  tr
-                    td
-                      select
-                        option(value='board1') Board 1
-                        option(value='board2') Board 2
-                  tr
-                    td
-                      button Pin it!
+          h2 #{(result.rem)}
+          p
+        - for( var inx=0,j=0;inx<(result.top);inx++,j=j+5)
+             .boxA
+               .box.margin-btm
+                 img(src='#{result.answer[(j+inx)]}', width='320', height='240', alt='')
+                 .details
+                   p
+                     | Tags : #{result.tag[(j+inx)]}
+                     br
+                     | Owner : #{result.username[(j+inx)]} 
+                     br
+                     | Average Rating : #{ratingResult.rating[(j+inx)].AVG_SCORE}
+                     br
+                 div(id='but'+(j+inx), class='button', rel='#image'+(j+inx)) Pin it!
+                 div(id='image'+(j+inx), class='simple_overlay')
+                   form(action='/pin', method ='post')
+                     img(src='#{result.answer[(j+inx)]}', width='320', height='240')
+                     .details
+                       table
+                         tr
+                           td
+                             input(type='hidden', name='photoid', value='#{result.photoid[(j+inx)]}')
+                             input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx)]}')
+                             select(name = 'boardSelected')
+                               - for(var b=0;b<(boardResult.boardsLength);b++)
+                                 option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
+
+                         tr
+                           td
+                             input(type='submit' , value='Pin it')
+                           
+                 div(id='butr'+(j+inx), class='button', rel='#imager'+(j+inx)) Rate it!
+                 div(id='imager'+(j+inx), class='simple_overlay')
+                   form(action='/rate', method ='post')
+                     img(src='#{result.answer[(j+inx)]}', width='320', height='240')
+                     .details
+                       table
+                         tr
+                           td
+                             input(type='hidden', name='photoid', value='#{result.photoid[(j+inx)]}')
+                             input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx)]}')
+                             select(name = 'Rating')
+                               option(value='1') 1
+                               option(value='2') 2
+                               option(value='3') 3
+                               option(value='4') 4
+                               option(value='5') 5
+
+                         tr
+                           td
+                             input(type='submit' , value='Rate it')                            
+                             
+               .box
+                 img(src='#{result.answer[(j+inx+1)]}', width='320', height='280', alt='')
+                 .details
+                     p
+                       | **Tags : #{result.tag[(j+inx+1)]}**
+                       br
+                       | **Owner : #{result.username[(j+inx+1)]}**
+                       br
+                       | **Average Rating : #{ratingResult.rating[(j+inx+1)].AVG_SCORE}**
+                       br
+                 div(id='but'+(j+inx+1),class='button',rel='#image'+(j+inx+1)) Pin it!
+                 div(id='image'+(j+inx+1), class='simple_overlay')
+                   form(action='/pin', method ='post')                 
+                     img(src='#{result.answer[(j+inx+1)]}', width='320', height='280')
+                       .details
+                         table
+                           tr
+                             td
+                               input(type='hidden', name='photoid', value='#{result.photoid[(j+inx+1)]}')
+                               input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx+1)]}')
+                               select(name = 'boardSelected')
+                               - for(var b=0;b<(boardResult.boardsLength);b++)
+                                 option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
+                         tr
+                           td
+                             button Pin it!
+                 div(id='butr'+(j+inx+1), class='button', rel='#imager'+(j+inx+1)) Rate it!
+                 div(id='imager'+(j+inx+1), class='simple_overlay')
+                   form(action='/rate', method ='post')
+                     img(src='#{result.answer[(j+inx+1)]}', width='320', height='240')
+                     .details
+                       table
+                         tr
+                           td
+                             input(type='hidden', name='photoid', value='#{result.photoid[(j+inx+1)]}')
+                             input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx+1)]}')
+                                                                              
+                             select(name = 'Rating')
+                               option(value='1') 1
+                               option(value='2') 2
+                               option(value='3') 3
+                               option(value='4') 4
+                               option(value='5') 5
+
+                         tr
+                           td
+                             input(type='submit' , value='Rate it')                           
+             .boxB
+               .box
+                 img(src='#{result.answer[(j+inx+2)]}', width='320', height='280', alt='')
+                 .details
+                   p
+                     | b Tags : #{result.tag[(j+inx+2)]}
+                     br
+                     | b Owner : #{result.username[(j+inx+2)]}
+                     br
+                     | b Average Rating : #{ratingResult.rating[(j+inx+2)].AVG_SCORE}
+                     br
+                 div(id='but'+(j+inx+2),class='button',rel='#image'+(j+inx+2)) Pin it!
+                 div(id='image'+(j+inx+2), class='simple_overlay')
+                   form(action='/pin', method ='post')                    
+                     img(src='#{result.answer[(j+inx+2)]}', width='320', height='280')
+                       .details
+                         table
+                           tr
+                             td
+                               input(type='hidden', name='photoid', value='#{result.photoid[(j+inx+2)]}')
+                               input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx+2)]}')
+                               select(name = 'boardSelected')
+                                 - for(var b=0;b<(boardResult.boardsLength);b++)
+                                   option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
+                           tr
+                             td
+                               button Pin it!
+                 div(id='butr'+(j+inx+2), class='button', rel='#imager'+(j+inx+2)) Rate it!
+                 div(id='imager'+(j+inx+2), class='simple_overlay')
+                   form(action='/rate', method ='post')
+                     img(src='#{result.answer[(j+inx+2)]}', width='320', height='240')
+                     .details
+                       table
+                         tr
+                           td
+                             select(name = 'Rating')
+                               option(value='1') 1
+                               option(value='2') 2
+                               option(value='3') 3
+                               option(value='4') 4
+                               option(value='5') 5
+
+                        tr
+                          td
+                            input(type='submit' , value='Rate it')
+               .box
+                 img(src='#{result.answer[(j+inx+3)]}', width='320', height='240', alt='')
+                 .details
+                   p
+                     | b Tags : #{result.tag[(j+inx+3)]}
+                     br
+                     | b Owner : #{result.username[(j+inx+3)]}
+                     br
+                     | b Average Rating : #{ratingResult.rating[(j+inx+3)].AVG_SCORE}
+                     br
+                 div(id='but'+(j+inx+3),class='button',rel='#image'+(j+inx+3)) Pin it!
+                 div(id='image'+(j+inx+3), class='simple_overlay')
+                   form(action='/pin', method ='post')  
+                     img(src='#{result.answer[(j+inx+3)]}',, width='320', height='240')
+                       .details
+                         table
+                          tr
+                           td
+                             input(type='hidden', name='photoid', value='#{result.photoid[(j+inx+3)]}')
+                             input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx+3)]}')
+                             select(name = 'boardSelected')
+                               - for(var b=0;b<(boardResult.boardsLength);b++)
+                                 option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
+
+                       tr
+                         td
+                           button Pin it!
+                 div(id='butr'+(j+inx+3), class='button', rel='#imager'+(j+inx+3)) Rate it!
+                 div(id='imager'+(j+inx+3), class='simple_overlay')
+                   form(action='/rate', method ='post')
+                     img(src='#{result.answer[(j+inx+3)]}', width='320', height='240')
+                     .details
+                       table
+                         tr
+                           td
+                             select(name = 'Rating')
+                               option(value='1') 1
+                               option(value='2') 2
+                               option(value='3') 3
+                               option(value='4') 4
+                               option(value='5') 5
+
+                        tr
+                          td
+                            input(type='submit' , value='Rate it')
+             .boxC
+               .box
+                 img(src='#{result.answer[(j+inx+4)]}', width='320', height='240', alt='')
+                 .details
+                   p
+                     | b Tags : #{result.tag[(j+inx+4)]}
+                     br
+                     | b Owner : #{result.username[(j+inx+4)]}
+                     br
+                     | b Average Rating : #{ratingResult.rating[(j+inx+4)].AVG_SCORE}
+                     br
+                 div(id='but'+(j+inx+4),class='button',rel='#image'+(j+inx+4)) Pin it!
+                 div(id='image'+(j+inx+4), class='simple_overlay')
+                   form(action='/pin', method ='post')   
+                     img(src='#{result.answer[(j+inx+4)]}', width='320', height='240')
+                       .details
+                         table
+                           tr
+                             td
+                               input(type='hidden', name='photoid', value='#{result.photoid[(j+inx+4)]}')
+                               input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx+4)]}')
+                               select(name = 'boardSelected')
+                                 - for(var b=0;b<(boardResult.boardsLength);b++)
+                                   option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
+
+                       tr
+                         td
+                           button Pin it!
+                 div(id='butr'+(j+inx+4), class='button', rel='#imager'+(j+inx+4)) Rate it!
+                 div(id='imager'+(j+inx+4), class='simple_overlay')
+                   form(action='/rate', method ='post')
+                     img(src='#{result.answer[(j+inx+4)]}', width='320', height='240')
+                     .details
+                       table
+                         tr
+                           td
+                             select(name = 'Rating')
+                               option(value='1') 1
+                               option(value='2') 2
+                               option(value='3') 3
+                               option(value='4') 4
+                               option(value='5') 5
+
+                        tr
+                          td
+                            input(type='submit' , value='Rate it')
+               .box
+                 img(src='#{result.answer[(j+inx+5)]}', width='320', height='280', alt='')
+                 .details
+                   p
+                     | b Tags : #{result.tag[(j+inx+5)]}
+                     br
+                     | b Owner : #{result.username[(j+inx+5)]}
+                     br
+                     | b Average Rating : #{ratingResult.rating[(j+inx+5)].AVG_SCORE}
+                     br
+                 div(id='but'+(j+inx+5),class='button',rel='#image'+(j+inx+5)) Pin it!
+                 div(id='image'+(j+inx+5), class='simple_overlay')
+                   form(action='/pin', method ='post')   
+                     img(src='#{result.answer[(j+inx+5)]}', width='320', height='280')
+                       .details
+                         table
+                           tr
+                             td
+                               input(type='hidden', name='photoid', value='#{result.photoid[(j+inx+5)]}')
+                               input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx+5)]}')
+                               select(name = 'boardSelected')
+                                - for(var b=0;b<(boardResult.boardsLength);b++)
+                                  option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
+
+                         tr
+                           td
+                             button Pin it!
+                 div(id='butr'+(j+inx+5), class='button', rel='#imager'+(j+inx+5)) Rate it!
+                 div(id='imager'+(j+inx+5), class='simple_overlay')
+                   form(action='/rate', method ='post')
+                     img(src='#{result.answer[(j+inx+5)]}', width='320', height='240')
+                     .details
+                       table
+                         tr
+                           td
+                             select(name = 'Rating')
+                               option(value='1') 1
+                               option(value='2') 2
+                               option(value='3') 3
+                               option(value='4') 4
+                               option(value='5') 5
+
+                        tr
+                          td
+                            input(type='submit' , value='Rate it')                           
+        - if (result.bottom >=1 )
+        
+             .boxA
+               .box.margin-btm
+                 img(src='#{result.answer[result.rem]}', width='320', height='240', alt='')
+                 .details
+                   p
+                     | b Tags : #{result.tag[(result.rem)]}
+                     br
+                     | b Owner : #{result.username[(result.rem)]}
+                     br
+                     | b Average Rating : #{ratingResult.rating[(result.rem)].AVG_SCORE}
+                     br
+                 div(id='but'+(result.rem), class='button', rel='#image'+(result.rem)) Pin it!
+                 div(id='image'+(result.rem), class='simple_overlay')
+                   form(action='/pin', method ='post')                    
+                     img(src='#{result.answer[(result.rem)]}', width='320', height='280')
+                     .details
+                       table
+                         tr
+                           td
+                             input(type='hidden', name='photoid', value='#{result.photoid[(result.rem)]}')
+                             input(type='hidden', name='sourceid', value='#{result.sourceid[(result.rem)]}')
+                             select(name = 'boardSelected')
+                               - for(var b=0;b<(boardResult.boardsLength);b++)
+                                 option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
+
+                       tr
+                         td
+                           button Pin it!
+                 div(id='butr'+(result.rem), class='button', rel='#imager'+(result.rem)) Rate it!
+                 div(id='imager'+(result.rem), class='simple_overlay')                 
+                   form(action='/rate', method ='post')
+                     img(src='#{result.answer[(result.rem)]}', width='320', height='240')
+                     .details
+                       table
+                         tr
+                           td
+                             input(type='hidden', name='photoid', value='#{result.photoid[(result.rem)]}')
+                             input(type='hidden', name='sourceid', value='#{result.sourceid[(result.rem)]}')                           
+                             select(name = 'Rating')
+                               option(value='1') 1
+                               option(value='2') 2
+                               option(value='3') 3
+                               option(value='4') 4
+                               option(value='5') 5
+
+                      tr
+                        td
+                          input(type='submit' , value='Rate it')
+                           
+        - if (result.bottom >= 2 )
+        
+             .boxB
+               .box.margin
+                 img(src='#{result.answer[(result.rem+1)]}', width='320', height='280', alt='')
+                 .details
+                   p
+                     | b Tags : #{result.tag[(result.rem+1)]}
+                     br
+                     | b Owner : #{result.username[(result.rem+1)]}
+                     br
+                     | b Average Rating : #{ratingResult.rating[(result.rem+1)].AVG_SCORE}
+                     br
+                 div(id='but'+(result.rem+1), class='button', rel='#image'+(result.rem+1)) Pin it!
+                 div(id='image'+(result.rem+1), class='simple_overlay')
+                   form(action='/pin', method ='post')                    
+                     img(src='#{result.answer[(result.rem+1)]}', width='320', height='280')
+                     .details
+                       table
+                         tr
+                           td
+                             input(type='hidden', name='photoid', value='#{result.photoid[(result.rem+1)]}')
+                             input(type='hidden', name='sourceid', value='#{result.sourceid[(result.rem+1)]}')
+                             select(name = 'boardSelected')
+                               - for(var b=0;b<(boardResult.boardsLength);b++)
+                                 option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
+       
+                         tr
+                           td
+                             button Pin it!     
+                 div(id='butr'+(result.rem+1), class='button', rel='#imager'+(result.rem+1)) Rate it!
+                 div(id='imager'+(result.rem+1), class='simple_overlay')
+                   form(action='/rate', method ='post')
+                     img(src='#{result.answer[(result.rem+1)]}', width='320', height='240')
+                     .details
+                       table
+                         tr
+                           td
+                             input(type='hidden', name='photoid', value='#{result.photoid[(result.rem+1)]}')
+                             input(type='hidden', name='sourceid', value='#{result.sourceid[(result.rem+1)]}')                            
+                              
+                             select(name = 'Rating')
+                               option(value='1') 1
+                               option(value='2') 2
+                               option(value='3') 3
+                               option(value='4') 4
+                               option(value='5') 5
+
+                        tr
+                          td
+                            input(type='submit' , value='Rate it')        
+        - if (result.bottom >= 3)
+        
+             .boxC
+               .box.margin
+                 img(src='#{result.answer[(result.rem+2)]}', width='320', height='240', alt='')
+                 .details
+                   p
+                     | b Tags : #{result.tag[(result.rem+2)]}
+                     br
+                     | b Owner : #{result.username[(result.rem+2)]}
+                     br
+                     | b Average Rating : #{ratingResult.rating[(result.rem+2)].AVG_SCORE}
+                     br
+                 div(id='but'+(result.rem+2), class='button', rel='#image'+(result.rem+2)) Pin it!
+                 div(id='image'+(result.rem+2), class='simple_overlay')
+                   form(action='/pin', method ='post')                    
+                     img(src='#{result.answer[(result.rem+2)]}', width='320', height='240')
+                     .details
+                       table
+                         tr
+                           td
+                             input(type='hidden', name='photoid', value='#{result.photoid[(result.rem+2)]}')
+                             input(type='hidden', name='sourceid', value='#{result.sourceid[(result.rem+2)]}')
+                             select(name = 'boardSelected')
+                               - for(var b=0;b<(boardResult.boardsLength);b++)
+                                 option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
+                         tr
+                           td
+                             button Pin it!   
+                 div(id='butr'+(result.rem+2), class='button', rel='#imager'+(result.rem+2)) Rate it!
+                 div(id='imager'+(result.rem+2), class='simple_overlay')
+                   form(action='/rate', method ='post')
+                     img(src='#{result.answer[(result.rem+2)]}', width='320', height='240')
+                     .details
+                       table
+                         tr
+                           td
+                             input(type='hidden', name='photoid', value='#{result.photoid[(result.rem+2)]}')
+                             input(type='hidden', name='sourceid', value='#{result.sourceid[(result.rem+2)]}')                           
+                             select(name = 'Rating')
+                               option(value='1') 1
+                               option(value='2') 2
+                               option(value='3') 3
+                               option(value='4') 4
+                               option(value='5') 5
+
+                        tr
+                          td
+                            input(type='submit' , value='Rate it')
+                          
+        - if (result.bottom >= 4 )
+        
+             .boxA
+               .box.margin-btm
+                 img(src='#{result.answer[(result.rem+3)]}', width='320', height='280', alt='')
+                 .details
+                   p
+                     | b Tags : #{result.tag[(result.rem+3)]}
+                     br
+                     | b Owner : #{result.username[(result.rem+3)]}
+                     br
+                     | b Average Rating : #{ratingResult.rating[(result.rem+3)].AVG_SCORE}
+                     br
+                 div(id='but'+(result.rem+3), class='button', rel='#image'+(result.rem+3)) Pin it!
+                 div(id='image'+(result.rem+3), class='simple_overlay')
+                   form(action='/pin', method ='post')   
+                     img(src='#{result.answer[(result.rem+3)]}', width='320', height='280')
+                     .details
+                       table
+                         tr
+                           td
+                             input(type='hidden', name='photoid', value='#{result.photoid[(result.rem+3)]}')
+                             input(type='hidden', name='sourceid', value='#{result.sourceid[(result.rem+3)]}')
+                             select(name = 'boardSelected')
+                               - for(var b=0;b<(boardResult.boardsLength);b++)
+                                 option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
+                         tr
+                           td
+                             button Pin it!   
+                 div(id='butr'+(result.rem+3), class='button', rel='#imager'+(result.rem+3)) Rate it!
+                 div(id='imager'+(result.rem+3), class='simple_overlay')
+                   form(action='/rate', method ='post')
+                     img(src='#{result.answer[(result.rem+3)]}', width='320', height='240')
+                     .details
+                       table
+                         tr
+                           td
+                             input(type='hidden', name='photoid', value='#{result.photoid[(result.rem+3)]}')
+                             input(type='hidden', name='sourceid', value='#{result.sourceid[(result.rem+3)]}')                           
+                             select(name = 'Rating')
+                               option(value='1') 1
+                               option(value='2') 2
+                               option(value='3') 3
+                               option(value='4') 4
+                               option(value='5') 5
+
+                        tr
+                          td
+                            input(type='submit', value='Rate it')                           
+        - if (result.bottom >=5 )
+        
+             .boxB
+               .box.margin
+                 img(src='#{result.answer[(result.rem+4)]}', width='320', height='240', alt='')
+                 .details
+                   p
+                     | b Tags : #{result.tag[(result.rem+4)]}
+                     br
+                     | b Owner : #{result.username[(result.rem+4)]}
+                     br
+                     | b Average Rating : #{ratingResult.rating[(result.rem+4)].AVG_SCORE}
+                     br
+                 div(id='but'+(result.rem+4), class='button', rel='#image'+(result.rem+4)) Pin it!
+                 div(id='image'+(result.rem+4), class='simple_overlay')
+                   form(action='/pin', method ='post') 
+                     img(src='#{result.answer[(result.rem+4)]}', width='320', height='240')
+                                        
+                       .details
+                         table
+                           tr
+                             td
+                               input(type='hidden', name='photoid', value='#{result.photoid[(result.rem+4)]}')
+                               input(type='hidden', name='sourceid', value='#{result.sourceid[(result.rem+4)]}')
+                               select(name = 'boardSelected')
+                                 - for(var b=0;b<(boardResult.boardsLength);b++)
+                                   option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
+                           tr
+                             td
+                               button Pin it!      
+                 div(id='butr'+(result.rem+4), class='button', rel='#imager'+(result.rem+4)) Rate it!
+                 div(id='imager'+(result.rem+4), class='simple_overlay')
+                   form(action='/rate', method ='post')
+                     img(src='#{result.answer[(result.rem+4)]}', width='320', height='240')
+                     .details
+                       table
+                         tr
+                           td
+                             input(type='hidden', name='photoid', value='#{result.photoid[(result.rem+4)]}')
+                             input(type='hidden', name='sourceid', value='#{result.sourceid[(result.rem+4)]}')                           
+                             select(name = 'Rating')
+                               option(value='1') 1
+                               option(value='2') 2
+                               option(value='3') 3
+                               option(value='4') 4
+                               option(value='5') 5
+
+                        tr
+                          td
+                            input(type='submit' , value='Rate it')                                                                                   

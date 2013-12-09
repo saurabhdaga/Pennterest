@@ -16,12 +16,9 @@ function query_db(req,res,email,pass) {
    if ( err ) {
    	console.log(err);
    } else {
- 	// selecting rows
-   console.log(pass);
-   console.log(email);
+
    var str="select password from users where email ='"+email+"'";
-   console.log(str);
-   console.log(pass);
+  
  	connection.execute(str,
  	  [], 
  	  function(err, results) {
@@ -29,14 +26,17 @@ function query_db(req,res,email,pass) {
  	   	console.log(err);
  	   } else {
  	   	connection.close(); // done with the connection
- 	   	console.log(results.password);
- 	   	console.log(email);
- 	   	console.log(pass);
+ 	  	console.log(results);
+ 	   //	console.log(email);
+ 	   	//console.log(pass);
  	   	if(results.length >0 && results[0].PASSWORD.indexOf(pass) !=-1)
  	   	{console.log('Valid login');
  	   	req.session.name= email;
  	   	req.session.number = '1';
- 	   	res.redirect('index');
+ 	 
+ 	   
+ 	   res.redirect('index');
+ 	   	
  	   	
  	   	
  	   	}
@@ -59,6 +59,7 @@ res.render('login.jade',
 
 
 exports.do_work = function(req, res){
+//	console.log(req);
 var sha1=crypto.createHash('sha1');
 var pass=sha1.update(req.body.password).digest('hex');
 var user=query_db(req,res,req.body.email,pass);
