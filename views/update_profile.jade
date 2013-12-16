@@ -21,38 +21,45 @@ head
     #header.container
       #logo
         h1
-          a(href='#') PennTerest
+          a(href='index') PennTerest
+      #search
+        form(action='/search' method='post')
+          input(type='text',name='search', cols='40', rows='1')
+          input(type='submit')
+        
       #menu
         ul
           li.active
-            a(href='index.html')
+            a(href='/index')
               span Home
+          li.active
+            a(href='/profile?name=#{req.session.name}')
+              span Profile
+
           li.has-sub
-            a(href='#')
-              span Products
+            a
+              span Boards
             ul
-              li
-                a(href='#')
-                  span Widgets
-              li
-                a(href='#')
-                  span Menus
-              li.last
-                a(href='#')
-                  span Products
-          li.has-sub
-            a(href='#')
-              span Company
-            ul
-              li
-                a(href='#')
-                  span About
-              li.last
-                a(href='#')
-                  span Location
+              - if(boardResult.boardsLength!= 0)
+                - for(var inx=0;inx<(boardResult.boardsLength);inx++)
+                     li
+                       a(href='/board?name=#{boardResult.boards[inx]}')
+                         span #{boardResult.boards[inx]}
+          li.active
+            a
+              span 
+                div(id='create',rel='#forboard') Create Board
+                div(id='forboard', class='simple_overlay')
+                  .details
+                    form(action='/createBoard',method='post')
+                      label(style='color:#000;')
+                        | Enter the board name: 
+                        input(type='text',name='board')
+                        input(type='submit',value='Submit')
+                        
           li.last
-            a(href='#')
-              span Contact
+            a(href='/recommendation')
+              span Recommendation                 
     #page
       .container
         .title

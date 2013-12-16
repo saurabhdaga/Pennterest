@@ -267,6 +267,7 @@
 	.boxC
 	{
 		width: 320px;
+		
 	}
 
 	.boxA,
@@ -326,7 +327,8 @@
 	{
 		position: absolute;
 		top: 1em;
-		left: 40px;
+		font-size:10px;
+		left: 20px;
 	}
 	
 	#logo h1
@@ -480,7 +482,7 @@
     /* styling */
     background-color:#FFF;
     width:675px;
-    min-height:200px;
+    min-height:300px;
     //border:1px solid #666;
  
     /* CSS3 styling for latest browsers */
@@ -507,7 +509,10 @@
   width:150px;
   }
   
-  
+  #search{position: absolute;
+		top: 1em;
+		left: 130px;}
+		
   #create:hover{
   
   cursor:pointer;

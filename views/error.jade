@@ -1,0 +1,83 @@
+!!! strict
+html(xmlns='http://www.w3.org/1999/xhtml')
+  head
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+    script(src='http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js')
+  body
+    - for( var inx=0;inx<(result.total) && result != null;inx++)
+         !="<script>$(document).ready(function(){$('#but"+inx+"[rel]').overlay({mask:'#000'});});</script>"
+
+    - for( var inx=0;inx<(result.total) && result != null;inx++)
+         !="<script>$(document).ready(function(){$('#butr"+inx+"[rel]').overlay({mask:'#000'});});</script>"
+    
+    !="<script>$(document).ready(function(){$('#create[rel]').overlay({mask:'#000'});});</script>"     
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    title
+    meta(name='keywords', content='')
+    meta(name='description', content='')
+    link(href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900', rel='stylesheet')
+    link(href='stylesheets/default.css', rel='stylesheet', type='text/css', media='all')
+    link(href='stylesheets/menu.css', rel='stylesheet', type='text/css', media='all')
+    link(href='/stylesheets/fonts.css', rel='stylesheet', type='text/css', media='all')
+    //if IE 6
+      link(href='default_ie6.css', rel='stylesheet', type='text/css')
+    //if IE 6
+      link(href='default_ie6.css', rel='stylesheet', type='text/css')
+    //if IE 6
+      link(href='default_ie6.css', rel='stylesheet', type='text/css')
+    //if IE 6
+      link(href='default_ie6.css', rel='stylesheet', type='text/css')
+    #header.container
+      #logo
+        h1
+          a(href='index') PennTerest
+      #search
+        form(action='/search' method='get')
+          input(type='text',name='search', cols='40', rows='1')
+          input(type='submit')
+        
+      #menu
+        ul
+          li.active
+            a(href='/index')
+              span Home
+          li.active
+            a(href='/profile?name=#{req.session.name}')
+              span Profile
+
+          li.has-sub
+            a
+              span Boards
+            ul
+              - if(boardResult.boardsLength!= 0 && boardResult !=null )
+                - for(var inx=0;inx<(boardResult.boardsLength);inx++)
+                     li
+                       a(href='/board?name=#{boardResult.boards[inx]}')
+                         span #{boardResult.boards[inx]}
+              - else
+                    li
+                      No Boards
+          li.active
+            a
+              span 
+                div(id='create',rel='#forboard') Create Board
+                div(id='forboard', class='simple_overlay')
+                  .details
+                    form(action='/createBoard',method='post')
+                      label(style='color:#000;')
+                        | Enter the board name: 
+                        input(type='text',name='board')
+                        input(type='submit',value='Submit')
+                        
+          li.last
+            a(href='/recommendation')
+              span Recommendation                     	         
+    #page
+      .container
+        .title
+          
+          p
+                          
+        -if( result.answer ==null)
+            h3
+              | Integrity constraint violated                                                                            

@@ -11,7 +11,7 @@ var connectData = {
 		var express=require('express');
 		var app = express();
 
-function insert_rating(res,id,photo,source,rate){
+function insert_rating(req,res,id,photo,source,rate){
 	
 	oracle.connect(connectData, function(err, connection) {
 	    if ( err ) {
@@ -29,6 +29,8 @@ function insert_rating(res,id,photo,source,rate){
 		  	    	
 		  	    	console.log(err);
 		  	    	connection.close();
+		  	    	res.render('error.jade',{result:{total:null},boardResult:boardResult,ratingResult:null,req:req});
+		  	    	
 		  	    } else {
 		  	    	connection.close(); // done with the connection
 		  	    	res.redirect('index');
@@ -44,7 +46,13 @@ function insert_rating(res,id,photo,source,rate){
 
 exports.do_work = function(req, res){
 //	console.log(req.body);
-	insert_rating(res,req.session.name, req.body.photoid,req.body.sourceid,req.body.Rating);
+	if(req.session.name!=null){
+	insert_rating(req,res,req.session.name, req.body.photoid,req.body.sourceid,req.body.Rating);
+	}
+	else
+		{
+		res.redirect('login');
+		}
 	
 	
 

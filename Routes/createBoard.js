@@ -10,8 +10,22 @@ var connectData = {
 		var crypto=require('crypto');
 		var express=require('express');
 		var app = express();
-
-function insert_board(res,id,board){
+		var MongoClient = require('mongodb').MongoClient;
+		var Db = require('mongodb').Db,
+		Server = require('mongodb').Server,
+		ReplSetServers = require('mongodb').ReplSetServers,
+		ObjectID = require('mongodb').ObjectID,
+		Binary = require('mongodb').Binary,
+		GridStore = require('mongodb').GridStore,
+		Grid = require('mongodb').Grid,
+		Code = require('mongodb').Code,
+		BSON = require('mongodb').pure().BSON,
+		assert = require('assert');
+		var MongoDB = require('mongodb');
+		var fs = require('fs');
+		var request = require('request');
+		var http = require('http');
+function insert_board(req,res,id,board){
 	
 	oracle.connect(connectData, function(err, connection) {
 	    if ( err ) {
@@ -29,6 +43,8 @@ function insert_board(res,id,board){
 		  	    	
 		  	    	console.log(err);
 		  	    	connection.close();
+		  	    	res.render('error.jade',{result:{total:null},boardResult:boardResult,ratingResult:null,req:req});
+		  	    	
 		  	    } else {
 		  	    	connection.close(); // done with the connection
 		  	    	res.redirect('index');
@@ -44,8 +60,13 @@ function insert_board(res,id,board){
 
 exports.do_work = function(req, res){
 	//console.log(req.body.sourceid);
-	insert_board(res,req.session.name,req.body.board);
-	
+	if(req.session.name!=null){
+	insert_board(req,res,req.session.name,req.body.board);
+	}
+	else
+		{
+		res.redirect('login');
+		}
 	
 
 

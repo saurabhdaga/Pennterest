@@ -34,8 +34,9 @@ function query_db_interests(req,res) {
                               console.log(' boards' + results[i].INTEREST);
                               interest[i]=results[i].INTEREST;
                               }*/
-                          
-                          res.render('update_profile.jade',{interests:results});
+                    	  console.log("upadte profiel");
+                    	  console.log(req.session.boards.length);
+                          res.render('update_profile.jade',{interests:results,boardsResult:req.session.boards,boardsLength:req.session.boards.length});
                           
                           }
                           
@@ -76,12 +77,13 @@ function query_db_update_dp(req,res) {
         } else {
               // selecting rows
             username = 
-              connection.execute("update users set displaypicture = '/images/"+req.files.displaypicture.name+"' where email ='"+req.session.name+"'",
+              connection.execute("update users set displaypicture = 'Routes/displaypictures/"+req.files.displaypicture.name+"' where email ='"+req.session.name+"'",
                          [], 
                          function(err, results) {
                   if ( err ) {
                       console.log(err);
                       connection.close();
+                      res.redirect('index');
                   } else {
                       connection.close(); // done with the connection
                       console.log(results);
@@ -97,8 +99,10 @@ function query_db_update_dp(req,res) {
                           
                           }
                           
-                      else
+                      else{
                           console.log("dp updated");
+                          
+                      }
                       
                   }
         
@@ -229,17 +233,25 @@ function query_db_update_interest(req,res) {
 
 
 exports.do_work = function(req, res){
-    query_db_interests(req,res);
+	if(req.session.name!=null)
+    {query_db_interests(req,res);}
+	else
+		{
+		res.redirect('login');
+		}
     //console.log(req.body.interest);
 };
 
 exports.do_upload = function(req, res){
-    //console.log("ASDF" + req.files.displaypicture.path);
-    //console.log(req.body);
-    //console.log(req.session.name);
-    //console.log(req.body.interest.length);
+   if(req.session.name!=null){
     query_db_update_dp(req,res);
     query_db_update_affiliation(req,res);
     query_db_update_bday(req,res);
-    query_db_update_interest(req,res); 
+    if(req.body.interest!=null)
+       {query_db_update_interest(req,res); }}
+   else
+	   {
+	   res.redirect('login');
+	   }
+   
 };

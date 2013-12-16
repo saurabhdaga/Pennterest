@@ -6,13 +6,16 @@ var signup= require('./Routes/signup.js');
 var login= require('./Routes/login');
 var update_profile= require('./Routes/update_profile');
 var profile=require('./Routes/profile');
-
 var createBoard = require('./Routes/createBoard');
 var board = require('./Routes/board');
+var recommendation=require('./Routes/recommendation');
 var update_profile=require('./Routes/update_profile');
 var index= require('./Routes/index');
 var pin= require('./Routes/pin');
 var rate=require('./Routes/rate');
+var getcache=require('./Routes/getcache');
+var setcache=require('./Routes/setcache');
+var search=require('./Routes/search');
 var http = require('http');
 var path = require('path');
 var stylus =  require("stylus");
@@ -32,16 +35,20 @@ app.get('/',function(req,res){
 app.post('/signup',signup.do_work);
 app.post('/login',login.do_work);
 app.get('/index',index.do_work);
-//app.get('/update_profile',update_profile.do_work);
+app.get('/update_profile',update_profile.do_work);
 //app.post('/search',search.do_work);
 app.post('/pin',pin.do_work);
 app.post('/rate',rate.do_work);
 app.post('/createBoard',createBoard.do_work);
 app.get('/board',board.do_work);
-//app.get('/update_profile',update_profile.do_work);
-//app.post('/update_profile',update_profile.do_upload);
-//app.get('/profile',profile.do_work);
-
+app.get('/update_profile',update_profile.do_work);
+app.post('/update_profile',update_profile.do_upload);
+app.get('/profile',profile.do_work);
+app.get('/recommendation',recommendation.do_work);
+app.get('/search',search.do_work);
+app.get('/login',function(req,res){
+	res.render('login.jade');
+});
 
 
 
@@ -65,6 +72,7 @@ function init_app() {
     // all environments
       app.use(express.cookieParser());
       app.use(express.session({secret:'harkarsausup'}));
+      
     app.set('port', process.env.PORT || 8080);
    
     // Use Jade to do views
@@ -80,7 +88,7 @@ function init_app() {
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(app.router);
     app.use('/images/', express.static(__dirname + '/images/'));
-   
+    app.use('/Routes/displaypictures/',express.static(__dirname + '/Routes/displaypictures/'));
     // Use Stylus, which compiles .styl --> CSS
     app.use(stylus.middleware(
       { src: __dirname + '/public'
@@ -93,5 +101,9 @@ function init_app() {
     if ('development' == app.get('env')) {
       app.use(express.errorHandler());
     }
+    //var keyterms = "hello";
+   
+
+    
 
 }

@@ -10,8 +10,8 @@ var connectData = {
 		var crypto=require('crypto');
 		var express=require('express');
 		var app = express();
-
-function insert_pin(res,id,photo,source,board){
+var setcache=require('./setcache');
+function insert_pin(req,res,id,photo,source,board,callback){
 	
 	oracle.connect(connectData, function(err, connection) {
 	    if ( err ) {
@@ -26,12 +26,17 @@ function insert_pin(res,id,photo,source,board){
 		  			   [], 
 		  			   function(err, results) {
 		  	    if ( err ) {
-		  	    	
+		  	    	//document.alert("Cannot pin on the same board");
 		  	    	console.log(err);
 		  	    	connection.close();
+		  	    	res.render('error.jade',{result:{total:null},boardResult:boardResult,ratingResult:null,req:req});
+		  	    	callback && callback(null,null);
+		  	    	
 		  	    } else {
 		  	    	connection.close(); // done with the connection
-		  	    	res.redirect('index');
+		  	    	
+		  	    	callback && callback(null,"done");
+		  	    	
 		  	    	
 		  	    	
 		  	    }
@@ -43,9 +48,15 @@ function insert_pin(res,id,photo,source,board){
 }
 
 exports.do_work = function(req, res){
+	if(req.session.name!=null){
 	console.log(req.body.sourceid);
-	insert_pin(res,req.session.name,req.body.photoid,req.body.sourceid, req.body.boardSelected);
+	insert_pin(req,res,req.session.name,req.body.photoid,req.body.sourceid, req.body.boardSelected,setcache.do_work);
 	
+	}
+	else
+		{
+		res.redirect('login');
+		}
 	
 
 

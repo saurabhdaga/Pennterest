@@ -21,67 +21,68 @@ head
     #header.container
       #logo
         h1
-          a(href='#') PennTerest
+          a(href='index') PennTerest
+      #search
+        form(action='/search' method='post')
+          input(type='text',name='search', cols='40', rows='1')
+          input(type='submit')
+        
       #menu
         ul
           li.active
-            a(href='index.html')
+            a(href='/index')
               span Home
+          li.active
+            a(href='/profile?name=#{req.session.name}')
+              span Profile
+
           li.has-sub
-            a(href='#')
-              span Products
+            a
+              span Boards
             ul
-              li
-                a(href='#')
-                  span Widgets
-              li
-                a(href='#')
-                  span Menus
-              li.last
-                a(href='#')
-                  span Products
-          li.has-sub
-            a(href='#')
-              span Company
-            ul
-              li
-                a(href='#')
-                  span About
-              li.last
-                a(href='#')
-                  span Location
+              - if(boardResult.boardsLength!= 0)
+                - for(var inx=0;inx<(boardResult.boardsLength);inx++)
+                     li
+                       a(href='/board?name=#{boardResult.boards[inx]}')
+                         span #{boardResult.boards[inx]}
+          li.active
+            a
+              span 
+                div(id='create',rel='#forboard') Create Board
+                div(id='forboard', class='simple_overlay')
+                  .details
+                    form(action='/createBoard',method='post')
+                      label(style='color:#000;')
+                        | Enter the board name: 
+                        input(type='text',name='board')
+                        input(type='submit',value='Submit')
+                        
           li.last
-            a(href='#')
-              span Contact
+            a(href='/recommendation')
+              span Recommendation                 
     #page
       .container
         .title
-          form(action='/update_profile', method='post', enctype="multipart/form-data")
-            p
-              | Please select your birth date :
-              input#calendar(type='text',name='bdate')
-            p
-              | Select your display picture :
-              input(type='file', accept='image/*', name="displaypicture")   
-            p
-              | Please select your affiliation :
-              input(type='text', name='affiliation')
-            p Please update interests :
-              button#button(type='button', rel='#interest') Interests
-            #interest.simple_overlay
-              .details
-                p 
-                  !="<b>Select interest</b>"
-                table
-                  - if(interests.length == 0)
-                       p
-                         | No interests
-                  - for (var inx = 0; inx < interests.length ; inx++)
-                      tr
-                        td
-                          input(type='radio', value='#{interests[inx].INTEREST}' , name='interest')
-                        td &nbsp
-                        td
-                          p #{interests[inx].INTEREST}
-                        
-            input(type='submit', value='Submit')
+          p
+            img(src='#{data[0].DISPLAYPICTURE}',width='320', height='240',alt='Not uploaded yet')
+          p 
+            | #{data[0].USERNAME}
+          p
+            | Date of birth: #{data[0].BIRTHDAY}
+            if(data[0].BIRTHDAY==null)
+               p Not uploaded yet
+          p
+            | Affiliation: #{data[0].AFFILIATION}
+            if(data[0].AFFILIATION==null)
+              p Not uploaded yet
+            
+          p
+          - if(req.session.name==req.param('name'))
+              form(action='/update_profile',method='get')
+                input(type='submit',value='Update Profile')
+            - if(friendCount==0 && !(req.session.name==req.param('name')))  
+                 p
+                   form(action='/friend',method='post')
+                     input(type='hidden', name='user',value='#{req.session.name}')
+                     input(type='hidden',name='friend',value='#{req.param("name")}')
+                     input(type='submit',value='Add friend')         	  
