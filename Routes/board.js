@@ -35,7 +35,8 @@ function query_photo_board(req,board,callback) {
 	    	console.log(err);
 	    } else {
 		  	// selecting rows
-		  	connection.execute("select p.photoid,p.sourceid,p.userid,pp.url,u.firstname||' '||u.lastname as username,t.tag  from users u, pin p, photo pp, tags t where p.userid=u.email and p.photoid=pp.photoid and p.sourceid=pp.sourceid and t.photoid=p.photoid and t.sourceid=p.sourceid and p.boardname='"+board+"' and p.userid='"+req.session.name+"'",
+	    	var str="select p.photoid,p.sourceid,p.userid,pp.url,u.firstname||' '||u.lastname as username,t.tag  from users u, pin p, photo pp, tags t where p.userid=u.email and p.photoid=pp.photoid and p.sourceid=pp.sourceid and t.photoid=p.photoid and t.sourceid=p.sourceid and p.boardname='"+board+"' and p.userid='"+req.session.name+"'";
+		  	connection.execute(str,
 		  			   [], 
 		  			   function(err,qresults) {
 		  	    if ( err ) {
@@ -43,7 +44,7 @@ function query_photo_board(req,board,callback) {
 		  	    } else {
 		  	    	
 		  	    	
-		  	    	
+		  	    	console.log(str);
 		  	    	var photoid=[];
 		  	    	var sourceid=[];
 		  	    	var username=[];
@@ -52,6 +53,7 @@ function query_photo_board(req,board,callback) {
 		  	    	var tag=[];
 		  	    	var inx=0;
 		  	    	var i=0;
+		  	    	console.log(qresults);
 		  	    	if(qresults.length >0)
 		  	    		{
 		  	    		while(i<qresults.length)

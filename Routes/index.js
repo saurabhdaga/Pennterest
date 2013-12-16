@@ -126,7 +126,7 @@ function query_newsfeed_1(req,callback) {
 
 		  	   				};
 		  	   	callback && callback(null,resultNews);
-		  	   		
+		  	   		console.log("HHH");
 		  	   		console.log(resultNews);
 		 
 		  	 
