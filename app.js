@@ -21,6 +21,7 @@ var path = require('path');
 var stylus =  require("stylus");
 var nib =     require("nib");
 var url= require("url");
+var friend=require('./Routes/friend');
 
 var crypto=require('crypto');
 
@@ -43,6 +44,7 @@ app.post('/createBoard',createBoard.do_work);
 app.get('/board',board.do_work);
 app.get('/update_profile',update_profile.do_work);
 app.post('/update_profile',update_profile.do_upload);
+app.post('/friend',friend.do_upload);
 app.get('/profile',profile.do_work);
 app.get('/recommendation',recommendation.do_work);
 app.get('/search',search.do_work);

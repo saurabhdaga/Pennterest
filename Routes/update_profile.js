@@ -2,7 +2,7 @@ var connectData = {
   "hostname": "cis550project.cwkds7yrl8wb.us-west-2.rds.amazonaws.com", 
   "user": "allstars", 
   "password": "harkarsausup", 
-  "database": "PENNTR" };
+  "database": "PENNTR"};
 
 var oracle =  require("oracle");
 var crypto=require('crypto');
@@ -35,7 +35,7 @@ function query_db_interests(req,res) {
                               interest[i]=results[i].INTEREST;
                               }*/
                     	  console.log("upadte profiel");
-                    	  console.log(req.session.boards.length);
+                    	  //console.log(req.session.boards.length);
                           res.render('update_profile.jade',{interests:results,boardsResult:req.session.boards,boardsLength:req.session.boards.length});
                           
                           }

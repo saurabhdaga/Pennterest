@@ -29,7 +29,7 @@ function insert_rating(req,res,id,photo,source,rate){
 		  	    	
 		  	    	console.log(err);
 		  	    	connection.close();
-		  	    	res.render('error.jade',{result:{total:null},boardResult:boardResult,ratingResult:null,req:req});
+		  	    	res.render('error.jade',{result:{total:null},boardResult:boardResult,ratingOrder:null,req:req});
 		  	    	
 		  	    } else {
 		  	    	connection.close(); // done with the connection

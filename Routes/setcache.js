@@ -27,7 +27,7 @@ function query_db(callback) {
 	    	console.log(err);
 	    } else {
 		  	// selecting rows
-		  	connection.execute("select * from ((select photoid,sourceid, url,cacheflag from photo where cacheflag = 0) natural join(select photoid,sourceid,count(photoid) from pin group by photoid,sourceid having count(photoid)>=4))",[], 
+		  	connection.execute("select * from ((select photoid,sourceid, url,cacheflag from photo where cacheflag = 0) natural join(select photoid,sourceid,count(photoid) from pin group by photoid,sourceid having count(photoid)>4))",[], 
 		  			   function(err, results) {
 		  	    if ( err ) {
 		  	    	console.log(err);
@@ -47,7 +47,33 @@ function query_db(callback) {
 	  }); // end oracle.connect
 	}
 
+function update_db(sql_res){
+	
+	oracle.connect(connectData, function(err, connection) {
+	    if ( err ) {
+	    	console.log(err);
+	    } else {
+		  	// selecting rows
+		  	connection.execute("update photo set cacheflag=1 where Photoid='"+sql_res[0].PHOTOID+"'and sourceid='"+sql_res[0].SOURCEID+"'",[], 
+		  			   function(err, results) {
+		  	    if ( err ) {
+		  	    	console.log(err);
+		  	    } else {
+		  	    	connection.close(); // done with the connection
+		  	    	
 
+		  	    }
+
+		  	}); // end connection.execute
+	    }
+	  }); // end oracle.connect
+	
+
+	
+	
+	
+	
+}
 function query_mongo(sql_res){
 	
 	MongoClient.connect('mongodb://localhost:27017/pennterest', function(err, db) {
@@ -120,13 +146,15 @@ function query_mongo(sql_res){
 
 exports.do_work = function(){
 	query_db(function(err,sql_res){
-		if (sql_res.length >0)
+		if (sql_res.length >0){
+			update_db(sql_res);
+			
 			query_mongo(sql_res,function(err,str){
 				console.log(str);
-				
+			
 				
 			});
+		}
 	});
-	
 	
 };

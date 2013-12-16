@@ -28,10 +28,10 @@ function query_db(req,res,email,pass) {
  	   	connection.close(); // done with the connection
  	  	console.log(results);
 
- 	  	if(results.length >0 && results[0].PASSWORD.indexOf(pass) == null)
- 	  		insert_password(res,email,results[0].PASSWORD);
+ 	  	if(results.length >0 && results[0].PASSWORD == null)
+ 	  		insert_user(res,req,email,pass);
  	  		
- 	   	if(results.length >0 && results[0].PASSWORD.indexOf(pass) !=-1)
+ 	  	else if (results.length >0 && results[0].PASSWORD.indexOf(pass) !=-1)
  	   	{
  	   		
  	   		console.log('Valid login');
@@ -61,14 +61,14 @@ res.render('login.jade',
  );
 }
 
-function insert_user(res,email,password){
+function insert_user(res,req,email,pass){
 	
 	oracle.connect(connectData, function(err, connection) {
 	    if ( err ) {
 	    	console.log(err);
 	    } else {
 		  	// selecting rows
-		  	connection.execute("update USERS set password = '"+password+"'where email='"+email+"')",
+		  	connection.execute("update USERS set password = '"+pass+"' where email='"+email+"'",
 		  			   [], 
 		  			   function(err, results) {
 		  	    if ( err ) {
@@ -76,8 +76,12 @@ function insert_user(res,email,password){
 		  	    	console.log(err);
 		  	    	connection.close();
 		  	    } else {
-		  	    	connection.close(); // done with the connection
-		  	    	res.redirect('index');
+		  	    	console.log('Valid login');
+		  	 	   	req.session.name= email;
+		  	 	   	req.session.number = '1';
+		  	 	 
+		  	 	   
+		  	 	   res.redirect('index');
 		  	    	
 		  	    	
 		  	    }

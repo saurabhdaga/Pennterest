@@ -85,4 +85,7 @@ head
                    form(action='/friend',method='post')
                      input(type='hidden', name='user',value='#{req.session.name}')
                      input(type='hidden',name='friend',value='#{req.param("name")}')
-                     input(type='submit',value='Add friend')         	  
+                     input(type='submit',value='Add friend')
+            - else 
+                  p
+                    | Already your friend                  	  

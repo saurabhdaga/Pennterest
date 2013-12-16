@@ -51,7 +51,7 @@ exports.do_work = function(req, res){
 	if(req.session.name!=null){
 	console.log(req.body.sourceid);
 	insert_pin(req,res,req.session.name,req.body.photoid,req.body.sourceid, req.body.boardSelected,setcache.do_work);
-	
+	res.redirect('index');
 	}
 	else
 		{

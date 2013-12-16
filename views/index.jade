@@ -103,7 +103,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                              br
                              | Owner : #{result.username[(j+inx)]} 
                              br
-                       //      | Average Rating : #{ratingResult.rating[(j+inx)]}
+                             | Average Rating : #{ratingOrder.rating[(j+inx)].AVG_SCORE}
                              br      
 
                          tr
@@ -139,23 +139,23 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                  div(id='image'+(j+inx+1), class='simple_overlay')
                    form(action='/pin', method ='post')                 
                      img(src='#{result.answer[(j+inx+1)]}', width='320', height='240')
-                       .details
-                         table
-                           tr
-                             td
-                               input(type='hidden', name='photoid', value='#{result.photoid[(j+inx+1)]}')
-                               input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx+1)]}')
-                               select(name = 'boardSelected')
-                                 - for(var b=0;b<(boardResult.boardsLength);b++)
-                                   option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
-                             td
-                               p
-                               | Tags :  #{result.tag[(j+inx+1)]}
-                               br
-                               | Owner : #{result.username[(j+inx+1)]} 
-                               br
-                               | Average Rating : #{ratingResult.rating[(j+1)]}
-                               br
+                     .details
+                       table
+                         tr
+                           td
+                             input(type='hidden', name='photoid', value='#{result.photoid[(j+inx+1)]}')
+                             input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx+1)]}')
+                             select(name = 'boardSelected')
+                               - for(var b=0;b<(boardResult.boardsLength);b++)
+                                 option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
+                           td
+                             p
+                             | Tags :  #{result.tag[(j+inx+1)]}
+                             br
+                             | Owner : #{result.username[(j+inx+1)]} 
+                             br
+                             | Average Rating : #{ratingOrder.rating[(j+inx+1)]}
+                             br
                                  
                            tr
                              td
@@ -190,28 +190,28 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                  div(id='image'+(j+inx+2), class='simple_overlay')
                    form(action='/pin', method ='post')                    
                      img(src='#{result.answer[(j+inx+2)]}', width='320', height='240')
-                       .details
-                         table
-                           tr
-                             td
-                               input(type='hidden', name='photoid', value='#{result.photoid[(j+inx+2)]}')
-                               input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx+2)]}')
-                               select(name = 'boardSelected')
-                                 - for(var b=0;b<(boardResult.boardsLength);b++)
-                                   option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
-                                
-                             td
-                               p
-                               | Tags :  #{result.tag[(j+inx+2)]}
-                               br
-                               | Owner : #{result.username[(j+inx+2)]} 
-                               br
-                           //  | Average Rating : #{ratingResult.rating[(j+2)].AVG_SCORE}
-                               br              
+                     .details
+                       table
+                         tr
+                           td
+                             input(type='hidden', name='photoid', value='#{result.photoid[(j+inx+2)]}')
+                             input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx+2)]}')
+                             select(name = 'boardSelected')
+                               - for(var b=0;b<(boardResult.boardsLength);b++)
+                                 option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
+                              
+                           td
+                             p
+                             | Tags :  #{result.tag[(j+inx+2)]}
+                             br
+                             | Owner : #{result.username[(j+inx+2)]} 
+                             br
+                             | Average Rating : #{ratingOrder.rating[(j+inx+2)].AVG_SCORE}
+                             br              
                                    
-                           tr
-                             td
-                               button Pin it!
+                         tr
+                           td
+                             button Pin it!
                  div(id='butr'+(j+inx+2), class='button', rel='#imager'+(j+inx+2)) Rate it!
                  div(id='imager'+(j+inx+2), class='simple_overlay')
                    form(action='/rate', method ='post')
@@ -238,29 +238,29 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                  div(id='image'+(j+inx+3), class='simple_overlay')
                    form(action='/pin', method ='post')  
                      img(src='#{result.answer[(j+inx+3)]}',, width='320', height='240')
-                       .details
-                         table
-                          tr
+                     .details
+                       table
+                        tr
+                          td
+                            input(type='hidden', name='photoid', value='#{result.photoid[(j+inx+3)]}')
+                            input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx+3)]}')
+                            select(name = 'boardSelected')
+                              - for(var b=0;b<(boardResult.boardsLength);b++)
+                                option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
+                               
                            td
-                             input(type='hidden', name='photoid', value='#{result.photoid[(j+inx+3)]}')
-                             input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx+3)]}')
-                             select(name = 'boardSelected')
-                               - for(var b=0;b<(boardResult.boardsLength);b++)
-                                 option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
-                                 
-                             td
-                               p
-                               | Tags :  #{result.tag[(j+inx+3)]}
-                               br
-                               | Owner : #{result.username[(j+inx+3)]} 
-                               br
-                           //  | Average Rating : #{ratingResult.rating[(j+3)].AVG_SCORE}
-                               br                                 
+                             p
+                             | Tags :  #{result.tag[(j+inx+3)]}
+                             br
+                             | Owner : #{result.username[(j+inx+3)]} 
+                             br
+                             | Average Rating : #{ratingOrder.rating[(j+inx+3)].AVG_SCORE}
+                             br                                 
                                  
 
-                       tr
-                         td
-                           button Pin it!
+                     tr
+                       td
+                         button Pin it!
                  div(id='butr'+(j+inx+3), class='button', rel='#imager'+(j+inx+3)) Rate it!
                  div(id='imager'+(j+inx+3), class='simple_overlay')
                    form(action='/rate', method ='post')
@@ -288,29 +288,29 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                  div(id='image'+(j+inx+4), class='simple_overlay')
                    form(action='/pin', method ='post')   
                      img(src='#{result.answer[(j+inx+4)]}', width='320', height='240')
-                       .details
-                         table
-                           tr
-                             td
-                               input(type='hidden', name='photoid', value='#{result.photoid[(j+inx+4)]}')
-                               input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx+4)]}')
-                               select(name = 'boardSelected')
-                                 - for(var b=0;b<(boardResult.boardsLength);b++)
-                                   option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
+                     .details
+                       table
+                         tr
+                           td
+                             input(type='hidden', name='photoid', value='#{result.photoid[(j+inx+4)]}')
+                             input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx+4)]}')
+                             select(name = 'boardSelected')
+                               - for(var b=0;b<(boardResult.boardsLength);b++)
+                                 option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
                                    
-                             td
-                               p
-                               | Tags :  #{result.tag[(j+inx+4)]}
-                               br
-                               | Owner : #{result.username[(j+inx+4)]} 
-                               br
-                           //  | Average Rating : #{ratingResult.rating[(j+4)].AVG_SCORE}
-                               br                                   
+                           td
+                             p
+                             | Tags :  #{result.tag[(j+inx+4)]}
+                             br
+                             | Owner : #{result.username[(j+inx+4)]} 
+                             br
+                             | Average Rating : #{ratingOrder.rating[(j+inx+4)].AVG_SCORE}
+                             br                                   
                                    
 
-                       tr
-                         td
-                           button Pin it!
+                     tr
+                       td
+                         button Pin it!
                  div(id='butr'+(j+inx+4), class='button', rel='#imager'+(j+inx+4)) Rate it!
                  div(id='imager'+(j+inx+4), class='simple_overlay')
                    form(action='/rate', method ='post')
@@ -337,29 +337,29 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                  div(id='image'+(j+inx+5), class='simple_overlay')
                    form(action='/pin', method ='post')   
                      img(src='#{result.answer[(j+inx+5)]}', width='320', height='240')
-                       .details
-                         table
-                           tr
-                             td
-                               input(type='hidden', name='photoid', value='#{result.photoid[(j+inx+5)]}')
-                               input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx+5)]}')
-                               select(name = 'boardSelected')
-                                - for(var b=0;b<(boardResult.boardsLength);b++)
-                                  option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
-                                  
-                             td
-                               p
-                               | Tags :  #{result.tag[(j+inx+5)]}
-                               br
-                               | Owner : #{result.username[(j+inx+5)]} 
-                               br
-                           //  | Average Rating : #{ratingResult.rating[(j+5)].AVG_SCORE}
-                               br                                  
-                                  
-
+                     .details
+                       table
                          tr
                            td
-                             button Pin it!
+                             input(type='hidden', name='photoid', value='#{result.photoid[(j+inx+5)]}')
+                             input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx+5)]}')
+                             select(name = 'boardSelected')
+                              - for(var b=0;b<(boardResult.boardsLength);b++)
+                                option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
+                                
+                           td
+                             p
+                             | Tags :  #{result.tag[(j+inx+5)]}
+                             br
+                             | Owner : #{result.username[(j+inx+5)]} 
+                             br
+                             | Average Rating : #{ratingOrder.rating[(j+inx+5)].AVG_SCORE}
+                             br                                  
+                                  
+
+                       tr
+                         td
+                           button Pin it!
                  div(id='butr'+(j+inx+5), class='button', rel='#imager'+(j+inx+5)) Rate it!
                  div(id='imager'+(j+inx+5), class='simple_overlay')
                    form(action='/rate', method ='post')
@@ -405,7 +405,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                              br
                              | Owner : #{result.username[(result.rem)]} 
                              br
-                         //  | Average Rating : #{ratingResult.rating[(result.rem)].AVG_SCORE}
+                             | Average Rating : #{ratingOrder.rating[(result.rem)].AVG_SCORE}
                              br                                 
                                  
 
@@ -460,7 +460,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                              br
                              | Owner : #{result.username[(result.rem+1)]} 
                              br
-                         //  | Average Rating : #{ratingResult.rating[(result.rem+1)].AVG_SCORE}
+                             | Average Rating : #{ratingOrder.rating[(result.rem+1)].AVG_SCORE}
                              br                                 
                                  
        
@@ -515,7 +515,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                              br
                              | Owner : #{result.username[(result.rem+2)]} 
                              br
-                         //  | Average Rating : #{ratingResult.rating[(result.rem+2)].AVG_SCORE}
+                             | Average Rating : #{ratingOrder.rating[(result.rem+2)].AVG_SCORE}
                              br                       
                                  
                          tr
@@ -569,7 +569,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                              br
                              | Owner : #{result.username[(result.rem+3)]} 
                              br
-                         //  | Average Rating : #{ratingResult.rating[(result.rem+3)].AVG_SCORE}
+                             | Average Rating : #{ratingOrder.rating[(result.rem+3)].AVG_SCORE}
                              br                                
                                  
                          tr
@@ -621,7 +621,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                              br
                              | Owner : #{result.username[(result.rem+3)]} 
                              br
-                         //  | Average Rating : #{ratingResult.rating[(result.rem+3)].AVG_SCORE}
+                             | Average Rating : #{ratingOrder.rating[(result.rem+3)].AVG_SCORE}
                              br                                 
                                  
                          tr

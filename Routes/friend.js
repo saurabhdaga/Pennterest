@@ -1,3 +1,15 @@
+var connectData = { 
+  "hostname": "cis550project.cwkds7yrl8wb.us-west-2.rds.amazonaws.com", 
+  "user": "allstars", 
+  "password": "harkarsausup", 
+  "database": "PENNTR"};
+
+var oracle =  require("oracle");
+var crypto=require('crypto');
+var express=require('express');
+//var app = express();
+var fs= require('fs');
+
 
 function query_db_update_friend(req,res) {
     

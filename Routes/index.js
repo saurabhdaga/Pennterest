@@ -351,12 +351,11 @@ exports.do_work = function(req, res){
 							getcache(res,resultNews,0,function (err,resultNews){
 							
 							
-							console.log(ratingOrder);
 						
-					res.render('index.jade',{result:resultNews,boardResult:boardResult,ratingResult:ratingOrder,req:req});
+					res.render('index.jade',{result:resultNews,boardResult:boardResult,ratingOrder:ratingOrder,req:req});
 							});}
 				else
-					res.render('index.jade',{result:{total:null},boardResult:boardResult,ratingResult:null,req:req});
+					res.render('index.jade',{result:{total:null},boardResult:boardResult,ratingOrder:null,req:req});
 				});
 				
 				
