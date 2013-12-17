@@ -302,6 +302,10 @@ exports.do_work = function(req, res){
 							
 							
 						}
+					for (var m =ratingOrder.rating.length ; m< resultNews.photoid.length;m++)
+					{
+					ratingOrder.rating[m]={"PHOTOID":resultNews.photoid[m],"SOURCEID":resultNews.sourceid[m],"AVG_SCORE":'0'};
+					}
 					
 					getcache(res,resultNews,0,function (err,resultNews){
 					res.render('index.jade',{result:resultNews,boardResult:boardResult,ratingOrder:ratingOrder,req:req});

@@ -36,13 +36,13 @@ function query_db_interests(req,res) {
                               }*/
                     	  console.log("upadte profiel");
                     	  //console.log(req.session.boards.length);
-                          res.render('update_profile.jade',{interests:results,boardsResult:req.session.boards,boardsLength:req.session.boards.length});
+                          res.render('update_profile.jade',{interests:results,boardsResult:req.session.boards,boardsLength:req.session.boards.length,req:req});
                           
                           }
                           
                       else
                           console.log("no interests");
-                          res.render('update_profile.jade',{interests:results});
+                          res.render('update_profile.jade',{req:req,interests:results});
                       
                   }
         
@@ -95,7 +95,7 @@ function query_db_update_dp(req,res) {
                               interest[i]=results[i].INTEREST;
                               }*/
                           console.log("dp updated");
-                          res.render('update_profile.jade',{interests:results});
+                          res.render('update_profile.jade',{req:req,interests:results});
                           
                           }
                           
@@ -137,7 +137,7 @@ function query_db_update_affiliation(req,res) {
                               interest[i]=results[i].INTEREST;
                               }*/
                           console.log("dp updated");
-                          res.render('update_profile.jade',{interests:results});
+                          res.render('update_profile.jade',{req:req,interests:results});
                           
                           }
                           
@@ -176,7 +176,7 @@ function query_db_update_bday(req,res) {
                               interest[i]=results[i].INTEREST;
                               }*/
                           console.log("dp updated");
-                          res.render('update_profile.jade',{interests:results});
+                          res.render('update_profile.jade',{req:req,interests:results});
                           
                           }
                           
@@ -248,7 +248,8 @@ exports.do_upload = function(req, res){
     query_db_update_affiliation(req,res);
     query_db_update_bday(req,res);
     if(req.body.interest!=null)
-       {query_db_update_interest(req,res); }}
+       {query_db_update_interest(req,res); }
+    res.redirect('profile');}
    else
 	   {
 	   res.redirect('login');

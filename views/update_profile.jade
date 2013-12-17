@@ -25,7 +25,7 @@ head
       #search
         form(action='/search' method='post')
           input(type='text',name='search', cols='40', rows='1')
-          input(type='submit')
+          input(id='submit-query', type='submit')
         
       #menu
         ul
@@ -59,7 +59,12 @@ head
                         
           li.last
             a(href='/recommendation')
-              span Recommendation                 
+              span Recommendation
+              
+          li.last
+            a(href='/logout')
+              span Logout              
+      
     #page
       .container
         .title

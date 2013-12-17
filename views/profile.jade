@@ -25,7 +25,7 @@ head
       #search
         form(action='/search' method='post')
           input(type='text',name='search', cols='40', rows='1')
-          input(type='submit')
+          input(id='submit-query', type='submit')
         
       #menu
         ul
@@ -59,33 +59,36 @@ head
                         
           li.last
             a(href='/recommendation')
-              span Recommendation                 
+              span Recommendation
+              
+          li.last
+            a(href='/logout')
+              span Logout              
+      
     #page
       .container
         .title
-          p
-            img(src='#{data[0].DISPLAYPICTURE}',width='320', height='240',alt='Not uploaded yet')
-          p 
-            | #{data[0].USERNAME}
-          p
-            | Date of birth: #{data[0].BIRTHDAY}
-            if(data[0].BIRTHDAY==null)
-               p Not uploaded yet
-          p
-            | Affiliation: #{data[0].AFFILIATION}
-            if(data[0].AFFILIATION==null)
-              p Not uploaded yet
+          div(id='profile')
+            p
+              img(src='#{data[0].DISPLAYPICTURE}',width='320', height='240',alt='Not uploaded yet') 
+              br
+              | #{data[0].USERNAME}
+              br
+              | Date of birth: #{data[0].BIRTHDAY}
+              if(data[0].BIRTHDAY==null)
+                | Not uploaded yet
+              br
+              | Affiliation: #{data[0].AFFILIATION}
+              if(data[0].AFFILIATION==null)
+                | Not uploaded yet
             
-          p
-          - if(req.session.name==req.param('name'))
-              form(action='/update_profile',method='get')
-                input(type='submit',value='Update Profile')
-            - if(friendCount==0 && !(req.session.name==req.param('name')))  
-                 p
-                   form(action='/friend',method='post')
-                     input(type='hidden', name='user',value='#{req.session.name}')
-                     input(type='hidden',name='friend',value='#{req.param("name")}')
-                     input(type='submit',value='Add friend')
-            - else 
-                  p
-                    | Already your friend                  	  
+            
+            - if(req.session.name==req.param('name'))
+                form(action='/update_profile',method='get')
+                  input(id='submit-query', type='submit',value='Update Profile')
+              - if(friendCount==0 && !(req.session.name==req.param('name')))  
+                   
+                     form(action='/friend',method='post')
+                       input(type='hidden', name='user',value='#{req.session.name}')
+                       input(type='hidden',name='friend',value='#{req.param("name")}')
+                       input(type='submit',value='Add friend')                 	  

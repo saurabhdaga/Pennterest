@@ -10,7 +10,8 @@ html(xmlns='http://www.w3.org/1999/xhtml')
     - for( var inx=0;inx<(result.total) && result != null;inx++)
          !="<script>$(document).ready(function(){$('#butr"+inx+"[rel]').overlay({mask:'#000'});});</script>"
     
-    !="<script>$(document).ready(function(){$('#create[rel]').overlay({mask:'#000'});});</script>"     
+    !="<script>$(document).ready(function(){$('#create[rel]').overlay({mask:'#000'});});</script>"
+    !="<script>$(document).ready(function(){$('.bing-query').click(function(){$('#bing').attr('href','/bing?name='+$('#query-text').val());});});</script>"     
     meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
     title
     meta(name='keywords', content='')
@@ -32,9 +33,11 @@ html(xmlns='http://www.w3.org/1999/xhtml')
         h1
           a(href='index') PennTerest
       #search
-        form(action='/search' method='get')
-          input(type='text',name='search', cols='40', rows='1')
-          input(type='submit')
+        form(action='/search' method='post')
+          input(id='query-text', type='text',name='search', cols='25', rows='1')
+          input(id='submit-query', type='submit')
+          a(id='bing',class='bing-query')
+            | Bing!
         
       #menu
         ul
@@ -70,9 +73,13 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                         input(type='text',name='board')
                         input(type='submit',value='Submit')
                         
-          li.last
+          li.active
             a(href='/recommendation')
-              span Recommendation                     	         
+              span Recommendation
+              
+          li.last
+            a(href='/logout')
+              span Logout
     #page
       .container
         .title
@@ -94,7 +101,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                            td
                              input(type='hidden', name='photoid', value='#{result.photoid[(j+inx)]}')
                              input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx)]}')
-                             select(name = 'boardSelected')
+                             select(id='submit-query' name = 'boardSelected')
                                - for(var b=0;b<(boardResult.boardsLength);b++)
                                  option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
                            td
@@ -120,7 +127,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                            td
                              input(type='hidden', name='photoid', value='#{result.photoid[(j+inx)]}')
                              input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx)]}')
-                             select(name = 'Rating')
+                             select(id='submit-query' name = 'Rating')
                                option(value='1') 1
                                option(value='2') 2
                                option(value='3') 3
@@ -129,7 +136,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
 
                          tr
                            td
-                             input(type='submit' , value='Rate it')                            
+                             input(id='submit-query' type='submit' , value='Rate it')                            
                              
                .box
                  img(src='#{result.answer[(j+inx+1)]}', width='320', height='240', alt='')
@@ -145,7 +152,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                            td
                              input(type='hidden', name='photoid', value='#{result.photoid[(j+inx+1)]}')
                              input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx+1)]}')
-                             select(name = 'boardSelected')
+                             select(id='submit-query' name = 'boardSelected')
                                - for(var b=0;b<(boardResult.boardsLength);b++)
                                  option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
                            td
@@ -159,7 +166,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                                  
                            tr
                              td
-                               button Pin it!
+                               button(id='submit-query') Pin it!
                  div(id='butr'+(j+inx+1), class='button', rel='#imager'+(j+inx+1)) Rate it!
                  div(id='imager'+(j+inx+1), class='simple_overlay')
                    form(action='/rate', method ='post')
@@ -171,7 +178,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                              input(type='hidden', name='photoid', value='#{result.photoid[(j+inx+1)]}')
                              input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx+1)]}')
                                                                               
-                             select(name = 'Rating')
+                             select(id='submit-query' name = 'Rating')
                                option(value='1') 1
                                option(value='2') 2
                                option(value='3') 3
@@ -180,7 +187,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
 
                          tr
                            td
-                             input(type='submit' , value='Rate it')                           
+                             input(id='submit-query' type='submit' , value='Rate it')                           
              .boxB
                .box
                  img(src='#{result.answer[(j+inx+2)]}', width='320', height='240', alt='')
@@ -196,7 +203,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                            td
                              input(type='hidden', name='photoid', value='#{result.photoid[(j+inx+2)]}')
                              input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx+2)]}')
-                             select(name = 'boardSelected')
+                             select(id='submit-query' name = 'boardSelected')
                                - for(var b=0;b<(boardResult.boardsLength);b++)
                                  option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
                               
@@ -211,7 +218,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                                    
                          tr
                            td
-                             button Pin it!
+                             button(id='submit-query') Pin it!
                  div(id='butr'+(j+inx+2), class='button', rel='#imager'+(j+inx+2)) Rate it!
                  div(id='imager'+(j+inx+2), class='simple_overlay')
                    form(action='/rate', method ='post')
@@ -220,7 +227,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                        table
                          tr
                            td
-                             select(name = 'Rating')
+                             select(id='submit-query' name = 'Rating')
                                option(value='1') 1
                                option(value='2') 2
                                option(value='3') 3
@@ -229,7 +236,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
 
                         tr
                           td
-                            input(type='submit' , value='Rate it')
+                            input(id='submit-query' type='submit' , value='Rate it')
                .box
                  img(src='#{result.answer[(j+inx+3)]}', width='320', height='240', alt='')
                  .details
@@ -244,7 +251,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                           td
                             input(type='hidden', name='photoid', value='#{result.photoid[(j+inx+3)]}')
                             input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx+3)]}')
-                            select(name = 'boardSelected')
+                            select(id='submit-query' name = 'boardSelected')
                               - for(var b=0;b<(boardResult.boardsLength);b++)
                                 option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
                                
@@ -260,7 +267,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
 
                      tr
                        td
-                         button Pin it!
+                         button(id='submit-query') Pin it!
                  div(id='butr'+(j+inx+3), class='button', rel='#imager'+(j+inx+3)) Rate it!
                  div(id='imager'+(j+inx+3), class='simple_overlay')
                    form(action='/rate', method ='post')
@@ -269,7 +276,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                        table
                          tr
                            td
-                             select(name = 'Rating')
+                             select(id='submit-query' name = 'Rating')
                                option(value='1') 1
                                option(value='2') 2
                                option(value='3') 3
@@ -278,7 +285,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
 
                         tr
                           td
-                            input(type='submit' , value='Rate it')
+                            input(id='submit-query' type='submit' , value='Rate it')
              .boxC
                .box
                  img(src='#{result.answer[(j+inx+4)]}', width='320', height='240', alt='')
@@ -294,7 +301,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                            td
                              input(type='hidden', name='photoid', value='#{result.photoid[(j+inx+4)]}')
                              input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx+4)]}')
-                             select(name = 'boardSelected')
+                             select(id='submit-query' name = 'boardSelected')
                                - for(var b=0;b<(boardResult.boardsLength);b++)
                                  option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
                                    
@@ -310,7 +317,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
 
                      tr
                        td
-                         button Pin it!
+                         button(id='submit-query') Pin it!
                  div(id='butr'+(j+inx+4), class='button', rel='#imager'+(j+inx+4)) Rate it!
                  div(id='imager'+(j+inx+4), class='simple_overlay')
                    form(action='/rate', method ='post')
@@ -319,7 +326,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                        table
                          tr
                            td
-                             select(name = 'Rating')
+                             select(id='submit-query' name = 'Rating')
                                option(value='1') 1
                                option(value='2') 2
                                option(value='3') 3
@@ -328,7 +335,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
 
                         tr
                           td
-                            input(type='submit' , value='Rate it')
+                            input(id='submit-query' type='submit' , value='Rate it')
                .box
                  img(src='#{result.answer[(j+inx+5)]}', width='320', height='240', alt='')
                  .details
@@ -343,7 +350,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                            td
                              input(type='hidden', name='photoid', value='#{result.photoid[(j+inx+5)]}')
                              input(type='hidden', name='sourceid', value='#{result.sourceid[(j+inx+5)]}')
-                             select(name = 'boardSelected')
+                             select(id='submit-query' name = 'boardSelected')
                               - for(var b=0;b<(boardResult.boardsLength);b++)
                                 option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
                                 
@@ -359,7 +366,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
 
                        tr
                          td
-                           button Pin it!
+                           button(id='submit-query') Pin it!
                  div(id='butr'+(j+inx+5), class='button', rel='#imager'+(j+inx+5)) Rate it!
                  div(id='imager'+(j+inx+5), class='simple_overlay')
                    form(action='/rate', method ='post')
@@ -368,7 +375,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                        table
                          tr
                            td
-                             select(name = 'Rating')
+                             select(id='submit-query' name = 'Rating')
                                option(value='1') 1
                                option(value='2') 2
                                option(value='3') 3
@@ -377,7 +384,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
 
                         tr
                           td
-                            input(type='submit' , value='Rate it')                           
+                            input(id='submit-query' type='submit' , value='Rate it')                           
         - if (result.bottom >=1 && result.answer.length != null)
         
              .boxA
@@ -395,7 +402,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                            td
                              input(type='hidden', name='photoid', value='#{result.photoid[(result.rem)]}')
                              input(type='hidden', name='sourceid', value='#{result.sourceid[(result.rem)]}')
-                             select(name = 'boardSelected')
+                             select(id='submit-query' name = 'boardSelected')
                                - for(var b=0;b<(boardResult.boardsLength);b++)
                                  option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
                                  
@@ -411,7 +418,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
 
                          tr
                            td
-                             button Pin it!
+                             button(id='submit-query') Pin it!
                  div(id='butr'+(result.rem), class='button', rel='#imager'+(result.rem)) Rate it!
                  div(id='imager'+(result.rem), class='simple_overlay')                 
                    form(action='/rate', method ='post')
@@ -422,7 +429,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                            td
                              input(type='hidden', name='photoid', value='#{result.photoid[(result.rem)]}')
                              input(type='hidden', name='sourceid', value='#{result.sourceid[(result.rem)]}')                           
-                             select(name = 'Rating')
+                             select(id='submit-query', name = 'Rating')
                                option(value='1') 1
                                option(value='2') 2
                                option(value='3') 3
@@ -431,7 +438,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
 
                       tr
                         td
-                          input(type='submit' , value='Rate it')
+                          input(id='submit-query', type='submit' , value='Rate it')
                            
         - if (result.bottom >= 2 && result.answer != null)
         
@@ -450,7 +457,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                            td
                              input(type='hidden', name='photoid', value='#{result.photoid[(result.rem+1)]}')
                              input(type='hidden', name='sourceid', value='#{result.sourceid[(result.rem+1)]}')
-                             select(name = 'boardSelected')
+                             select(id='submit-query' name = 'boardSelected')
                                - for(var b=0;b<(boardResult.boardsLength);b++)
                                  option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
                                  
@@ -466,7 +473,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
        
                          tr
                            td
-                             button Pin it!     
+                             button(id='submit-query') Pin it!     
                  div(id='butr'+(result.rem+1), class='button', rel='#imager'+(result.rem+1)) Rate it!
                  div(id='imager'+(result.rem+1), class='simple_overlay')
                    form(action='/rate', method ='post')
@@ -478,7 +485,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                              input(type='hidden', name='photoid', value='#{result.photoid[(result.rem+1)]}')
                              input(type='hidden', name='sourceid', value='#{result.sourceid[(result.rem+1)]}')                            
                               
-                             select(name = 'Rating')
+                             select(id='submit-query' name = 'Rating')
                                option(value='1') 1
                                option(value='2') 2
                                option(value='3') 3
@@ -487,7 +494,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
 
                         tr
                           td
-                            input(type='submit' , value='Rate it')        
+                            input(id='submit-query' type='submit' , value='Rate it')        
         - if (result.bottom >= 3 && result.answer != null)
         
              .boxC
@@ -505,7 +512,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                            td
                              input(type='hidden', name='photoid', value='#{result.photoid[(result.rem+2)]}')
                              input(type='hidden', name='sourceid', value='#{result.sourceid[(result.rem+2)]}')
-                             select(name = 'boardSelected')
+                             select(id='submit-query' name = 'boardSelected')
                                - for(var b=0;b<(boardResult.boardsLength);b++)
                                  option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
                        
@@ -520,7 +527,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                                  
                          tr
                            td
-                             button Pin it!   
+                             button(id='submit-query') Pin it!   
                  div(id='butr'+(result.rem+2), class='button', rel='#imager'+(result.rem+2)) Rate it!
                  div(id='imager'+(result.rem+2), class='simple_overlay')
                    form(action='/rate', method ='post')
@@ -531,7 +538,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                            td
                              input(type='hidden', name='photoid', value='#{result.photoid[(result.rem+2)]}')
                              input(type='hidden', name='sourceid', value='#{result.sourceid[(result.rem+2)]}')                           
-                             select(name = 'Rating')
+                             select(id='submit-query' name = 'Rating')
                                option(value='1') 1
                                option(value='2') 2
                                option(value='3') 3
@@ -540,7 +547,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
 
                         tr
                           td
-                            input(type='submit' , value='Rate it')
+                            input(id='submit-query' type='submit' , value='Rate it')
                           
         - if (result.bottom >= 4 && result.answer != null)
         
@@ -559,7 +566,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                            td
                              input(type='hidden', name='photoid', value='#{result.photoid[(result.rem+3)]}')
                              input(type='hidden', name='sourceid', value='#{result.sourceid[(result.rem+3)]}')
-                             select(name = 'boardSelected')
+                             select(id='submit-query' name = 'boardSelected')
                                - for(var b=0;b<(boardResult.boardsLength);b++)
                                  option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
                                  
@@ -574,7 +581,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                                  
                          tr
                            td
-                             button Pin it!   
+                             button(id='submit-query') Pin it!   
                  div(id='butr'+(result.rem+3), class='button', rel='#imager'+(result.rem+3)) Rate it!
                  div(id='imager'+(result.rem+3), class='simple_overlay')
                    form(action='/rate', method ='post')
@@ -585,7 +592,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                            td
                              input(type='hidden', name='photoid', value='#{result.photoid[(result.rem+3)]}')
                              input(type='hidden', name='sourceid', value='#{result.sourceid[(result.rem+3)]}')                           
-                             select(name = 'Rating')
+                             select(id='submit-query' name = 'Rating')
                                option(value='1') 1
                                option(value='2') 2
                                option(value='3') 3
@@ -611,7 +618,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                            td
                              input(type='hidden', name='photoid', value='#{result.photoid[(result.rem+4)]}')
                              input(type='hidden', name='sourceid', value='#{result.sourceid[(result.rem+4)]}')
-                             select(name = 'boardSelected')
+                             select(id='submit-query' name = 'boardSelected')
                                - for(var b=0;b<(boardResult.boardsLength);b++)
                                  option(value='#{boardResult.boards[b]}') #{boardResult.boards[b]}
                                  
@@ -626,7 +633,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                                  
                          tr
                            td
-                             button Pin it!      
+                             button(id='submit-query') Pin it!      
                  div(id='butr'+(result.rem+4), class='button', rel='#imager'+(result.rem+4)) Rate it!
                  div(id='imager'+(result.rem+4), class='simple_overlay')
                    form(action='/rate', method ='post')
@@ -637,7 +644,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                            td
                              input(type='hidden', name='photoid', value='#{result.photoid[(result.rem+4)]}')
                              input(type='hidden', name='sourceid', value='#{result.sourceid[(result.rem+4)]}')                           
-                             select(name = 'Rating')
+                             select(id='submit-query' name = 'Rating')
                                option(value='1') 1
                                option(value='2') 2
                                option(value='3') 3
@@ -646,7 +653,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
 
                         tr
                           td
-                            input(type='submit' , value='Rate it')
+                            input(id='submit-query' type='submit' , value='Rate it')
                           
         -if( result.answer ==null)
             h3

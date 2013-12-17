@@ -34,7 +34,7 @@ html(xmlns='http://www.w3.org/1999/xhtml')
       #search
         form(action='/search' method='get')
           input(type='text',name='search', cols='40', rows='1')
-          input(type='submit')
+          input(id='submit-query', type='submit')input(id='submit-query', type='submit')
         
       #menu
         ul
@@ -71,7 +71,12 @@ html(xmlns='http://www.w3.org/1999/xhtml')
                         
           li.last
             a(href='/recommendation')
-              span Recommendation                     	         
+              span Recommendation
+              
+          li.last
+            a(href='/logout')
+              span Logout              
+          	         
     #page
       .container
         .title

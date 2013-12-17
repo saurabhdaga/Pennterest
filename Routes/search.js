@@ -39,7 +39,7 @@ function query_search(req,callback) {
 	    	console.log(err);
 	    } else {
 		  	// selecting rows
-		  	connection.execute("select photoid,sourceid,userid,url,firstname||' '||lastname as username,tag from pin natural join photo natural join tags inner join users on pin.userid=users.email where (photoid,sourceid) in(select photoid,sourceid from tags where instr(LOWER(tag),'"+req.body.search+"')<>0 union all select photoid,sourceid from tags where instr('"+req.body.search+"',LOWER(tag))<>0 union all select photoid,sourceid from tags where LOWER(tag) in (with test as(select LOWER('"+req.body.search+"') str from dual)select regexp_substr (str, '[^[:space:],]+', 1, rownum) split from test connect by level <= length (regexp_replace (str,'[^[:space:],]*'))  + 1))",
+		  	connection.execute("select photoid,sourceid,userid,url,firstname||' '||lastname as username,tag from pin natural join photo natural join tags inner join users on pin.userid=users.email where (photoid,sourceid) in(select photoid,sourceid from tags where instr(LOWER(tag),'"+req.body.search+"')<>0 union all select photoid,sourceid from tags where instr('"+req.body.search+"',LOWER(tag))<>0 union all select photoid,sourceid from tags where LOWER(tag) in (with test as (select LOWER('"+req.body.search+"') str from dual) select regexp_substr (str, '[^[:space:],]+', 1, rownum) split from test connect by level <= length (regexp_replace (str, '[^[:space:],]*'))  + 1))",
 		  			   [], 
 		  			   function(err,qresults) {
 		  	    if ( err ) {
@@ -318,7 +318,11 @@ exports.do_work = function(req, res){
 							
 							
 						}
-					
+					for (var m =ratingOrder.rating.length ; m< resultNews.photoid.length;m++)
+					{
+					ratingOrder.rating[m]={"PHOTOID":resultNews.photoid[m],"SOURCEID":resultNews.sourceid[m],"AVG_SCORE":'0'};
+					}
+					console.log(resultNews);
 					getcache(res,resultNews,0,function (err,resultNews){
 					res.render('index.jade',{result:resultNews,boardResult:boardResult,ratingOrder:ratingOrder,req:req});
 				});

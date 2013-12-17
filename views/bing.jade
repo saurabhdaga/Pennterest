@@ -1,0 +1,56 @@
+!!! strict
+html(xmlns='http://www.w3.org/1999/xhtml')
+head
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+    script(src='http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js')
+    script(src='http://code.jquery.com/ui/1.10.1/jquery-ui.js')
+  body
+    script
+      $(function() {$( "#calendar" ).datepicker({changeMonth: true,changeYear: true,dateFormat:"d M,y"}); });
+      $(function() {$("#button[rel]").overlay({mask: '#000'});});
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    title
+    meta(name='keywords', content='')
+    meta(name='description', content='')
+    link(href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900', rel='stylesheet')
+    link(href='stylesheets/default.css', rel='stylesheet', type='text/css', media='all')
+    link(href='stylesheets/menu.css', rel='stylesheet', type='text/css', media='all')
+    link(href='//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css', rel='stylesheet', type='text/css', media='all')
+    link(href='/stylesheets/fonts.css', rel='stylesheet', type='text/css', media='all')
+    link(href='/stylesheets/check.css', rel='stylesheet', type='text/css', media='all')
+    #header.container
+      #logo
+        h1
+          a(href='index') PennTerest
+      #search
+        form(action='/search' method='post')
+          input(type='text',name='search', cols='40', rows='1')
+          input(id='submit-query', type='submit')
+        
+      #menu
+        ul
+          li.active
+            a(href='/index')
+              span Home
+          li.active
+            a(href='/profile?name=#{req.session.name}')
+              span Profile
+                    
+          li.last
+            a(href='/recommendation')
+              span Recommendation
+              
+          li.last
+            a(href='/logout')
+              span Logout              
+      
+    #page
+      .container
+        .title
+          table
+            - for(var i=0;i<Math.floor(resultLength/2);i++)
+                  tr
+                    td
+                      img(src='#{result[i]}' width='320', height='240',style='{padding:4px}')
+                    td
+                      img(src='#{result[(i+1)]}' width='320', height='240',style='{padding:4px}')  

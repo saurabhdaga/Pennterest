@@ -22,6 +22,8 @@ var stylus =  require("stylus");
 var nib =     require("nib");
 var url= require("url");
 var friend=require('./Routes/friend');
+var logout=require('./Routes/logout');
+var bing=require('./Routes/bing');
 
 var crypto=require('crypto');
 
@@ -47,7 +49,10 @@ app.post('/update_profile',update_profile.do_upload);
 app.post('/friend',friend.do_upload);
 app.get('/profile',profile.do_work);
 app.get('/recommendation',recommendation.do_work);
-app.get('/search',search.do_work);
+app.post('/search',search.do_work);
+app.get('/logout',logout.do_work);
+app.get('/bing',bing.do_work);
+
 app.get('/login',function(req,res){
 	res.render('login.jade');
 });

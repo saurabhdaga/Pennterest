@@ -200,7 +200,8 @@
 		padding: 1em 3em 1em 2em;
 		background: #4C4532;
 		margin-right:1em;
-		letter-spacing: 0.20em;
+		margin-left:1.5em;
+		margin-bottom: 1em;
 		text-decoration: none;
 		text-transform: uppercase;
 		font-weight: 400;
@@ -225,7 +226,6 @@
 		display: inline-block;
 		padding: 1em 3em 1em 2em;
 		background: #333;
-		letter-spacing: 0.20em;
 		text-decoration: none;
 		text-transform: uppercase;
 		font-weight: 500;
@@ -459,6 +459,7 @@
 	{
 		background: #F0EFE9;
 		margin-bottom: 2em;
+		box-shadow: 10px 10px 5px #888888;
 	}
 	
 	.box .margin-btm
@@ -516,4 +517,44 @@
   #create:hover{
   
   cursor:pointer;
+  }
+  
+  #submit-query {
+  	    background: none repeat scroll 0% 0% rgb(76, 69, 50);
+    border: 1px solid #1C6C7A;
+    border-radius: 3px 3px 3px 3px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: 'BebasNeueRegular','Arial Narrow',Arial,sans-serif;
+    font-size: 15px;
+    margin:0;
+    padding: 5px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    transition: all 0.2s linear 0s;
+  }
+  
+  #query-text {
+      -moz-box-sizing: content-box;
+    border: 1px solid #B2B2B2;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 1px 4px 0 rgba(168, 168, 168, 0.6) inset;
+    margin-right: 4px;
+    padding: 10px 5px 10px 32px;
+    transition: all 0.2s linear 0s;
+    width: 250px;
+  }
+  
+  
+    #bing {
+  	    background: none repeat scroll 0% 0% rgb(76, 69, 50);
+    border: 1px solid #1C6C7A;
+    border-radius: 3px 3px 3px 3px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: 'BebasNeueRegular','Arial Narrow',Arial,sans-serif;
+    font-size: 15px;
+    margin:0;
+    padding: 5px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    transition: all 0.2s linear 0s;
   }
